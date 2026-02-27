@@ -12,22 +12,22 @@ Workflow interativo que ajuda profissionais e times a descobrir **onde e como us
 
 ## Sources & Integracoes
 
-Ao ativar este workflow, verifique quais sources estao disponiveis na sessao (listadas em `<sources>` no system prompt) e adapte o fluxo:
+Ao ativar este workflow, verifique quais sources estao disponiveis na sessao (listadas em `<sources>` no system prompt) e adapte o fluxo. **Nunca referencie uma integracao que o usuario nao tem configurada.**
 
 **Deteccao de dados (automatica):**
 - Verifique se `data/onet_task_statements.csv` e `data/onet_task_mappings.csv` existem no diretorio do workflow
 - Se existirem → use dados reais para scoring (marcar como `dados`)
 - Se nao existirem → use estimativa do modelo (marcar como `estimativa`). Informe o usuario uma vez: "Estou usando estimativas — com os datasets do AEI os scores ficam mais precisos."
 
-**Se `google-workspace` esta ativa:**
-- Na Fase 8 (entrega), ofereca salvar o diagnostico .md no Google Drive do usuario
-- Na Fase 7 (acoes), se a recomendacao envolver email/calendario/docs, referencie a integracao direta: "Posso rascunhar esse email no Gmail agora" ou "Posso criar o evento recorrente no Calendar"
+**Source de email/calendario/docs** (ex: `google-workspace`, `microsoft-365`, ou qualquer source com capacidade de enviar email, criar eventos, ou gerenciar documentos):
+- Na Fase 8 (entrega), ofereca salvar o diagnostico no armazenamento em nuvem do usuario
+- Na Fase 7 (acoes), se a recomendacao envolver email/calendario/docs, referencie a integracao direta: "Posso rascunhar esse email agora" ou "Posso criar o evento recorrente no calendario"
 
-**Se uma source de Slack esta ativa (qualquer slug com "slack"):**
-- Na Fase 7, se a recomendacao envolver comunicacao de time, ofereca: "Posso mandar um resumo do diagnostico no canal do time via Slack"
+**Source de mensageria de time** (ex: `slack`, `teams`, ou qualquer source com capacidade de enviar mensagens em canais):
+- Na Fase 7, se a recomendacao envolver comunicacao de time, ofereca: "Posso mandar um resumo do diagnostico no canal do time"
 
-**Se `notion` esta ativa:**
-- Na Fase 8, ofereca salvar o diagnostico como pagina no Notion do usuario
+**Source de knowledge base** (ex: `notion`, `confluence`, ou qualquer source com capacidade de criar paginas/docs):
+- Na Fase 8, ofereca salvar o diagnostico como pagina na knowledge base do usuario
 
 **Se nenhuma source externa esta ativa:**
 - Trabalhe 100% local — salvar .md no filesystem, sem mencionar integracoes
@@ -404,7 +404,7 @@ Espere o aluno escolher. **Nunca termine o workflow sem oferecer o proximo passo
 - G4 OS conecta com Slack, Gmail, Calendar, Drive, Notion via MCP — EXECUTA acoes, nao so sugere
 - G4 OS roda Python, cria skills, automatiza recorrencias — plataforma completa
 - Sempre mostrar "Com G4 OS" primeiro + "Alternativa" para quem nao tem
-- **Source-aware**: ao recomendar acoes, verifique as sources ativas no `<sources>` do system prompt. So referencie integracoes que o usuario de fato tem configuradas. Exemplo: se `google-workspace` nao esta em `<sources>`, nao diga "posso mandar pelo Gmail" — diga "voce pode enviar por email"
+- **Source-aware**: ao recomendar acoes, verifique as sources ativas no `<sources>` do system prompt. So referencie integracoes que o usuario de fato tem configuradas. Exemplo: se nao existe source de email ativa, nao diga "posso mandar pelo Gmail" — diga "voce pode enviar por email"
 - Consulte `knowledge/g4os-capabilities.md` para capacidades detalhadas
 
 ### Tom de Voz

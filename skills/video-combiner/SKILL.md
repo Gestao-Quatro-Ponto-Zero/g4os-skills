@@ -9,15 +9,15 @@ Automates the creation of ad video variations by combining Hook + Body + CTA seg
 
 ## Sources & Integracoes
 
-Ao ativar este skill, verifique quais sources estao disponiveis na sessao (listadas em `<sources>` no system prompt).
+Ao ativar este skill, verifique quais sources estao disponiveis na sessao (listadas em `<sources>` no system prompt). Procure por sources que deem acesso a **Google Drive / armazenamento em nuvem** (ex: `google-workspace`, `google-drive`, ou qualquer source com capacidade de `list_drive_items` / `search_drive_files`).
 
-**Se `google-workspace` esta ativa:**
-- Ofereca opcao de buscar videos do Google Drive (`list_drive_items`, `get_drive_file_download_url`)
-- Upload dos resultados de volta pro Drive (`create_drive_file` com `fileUrl=file://`)
+**Se existe source com acesso a Google Drive:**
+- Ofereca opcao de buscar videos do Drive (listar arquivos, baixar via URL)
+- Upload dos resultados de volta pro Drive apos processamento
 - Na Phase 1, pergunte: "Os videos estao no **Drive** ou em uma **pasta local**?"
 - Na Phase 5, faca upload automatico para a pasta de destino no Drive
 
-**Se `google-workspace` NAO esta ativa:**
+**Se NAO existe source com acesso a Drive:**
 - Trabalhe apenas com arquivos locais
 - **Nao mencione Google Drive como opcao** — evite frustrar o usuario com funcionalidade indisponivel
 - Na Phase 1, pergunte direto: "Qual o caminho da pasta com os videos?"
@@ -30,10 +30,10 @@ Ao ativar este skill, verifique quais sources estao disponiveis na sessao (lista
 Collect these inputs from the user (ask one topic at a time):
 
 **1. Source folder**
-- Se `google-workspace` ativa: "Qual a pasta com os videos? (link do Drive ou caminho local)"
-  - If Drive link: extract folder ID, use `list_drive_items` to find subfolders matching Hook/Body/CTA patterns
+- Se source de Drive disponivel: "Qual a pasta com os videos? (link do Drive ou caminho local)"
+  - If Drive link: extract folder ID, listar subpastas que matchem Hook/Body/CTA
   - If local path: scan for subfolders
-- Se `google-workspace` inativa: "Qual o caminho da pasta com os videos?"
+- Se sem source de Drive: "Qual o caminho da pasta com os videos?"
   - Scan for subfolders matching Hook/Body/CTA patterns
 
 **2. Subtitle preferences**
@@ -110,12 +110,12 @@ curl -L -o ~/.local/share/whisper-models/ggml-medium.bin \
 
 After user approves the test:
 
-1. If source is Drive (e `google-workspace` ativa), download ALL videos to local temp dirs
+1. If source is Drive (e source de Drive disponivel), download ALL videos to local temp dirs
 2. Run batch script without `--test` flag
 3. Monitor progress (the script prints progress per combination)
 4. Upload/entregar results:
 
-**Se `google-workspace` ativa e destino e Drive:**
+**Se source de Drive disponivel e destino e Drive:**
 - Use `create_drive_file` with `fileUrl=file://` and `mime_type=video/quicktime`
 - Files must be under the user's home directory (`$HOME/`) due to MCP sandbox restrictions
 - Organize by format in subfolders if total > 50 files
@@ -158,6 +158,6 @@ python3 scripts/batch_combine.py --hooks-dir H --bodys-dir B --ctas-dir C --outp
 ## Important Notes
 
 - Concatenation works WITHOUT re-encode only when all source videos share the same codec, resolution, and framerate. If they differ, fall back to re-encoding the concat step.
-- Para fontes do Drive (se `google-workspace` ativa), baixe todos os videos primeiro para evitar chamadas repetidas de API durante o batch.
+- Para fontes do Drive (se source de Drive disponivel), baixe todos os videos primeiro para evitar chamadas repetidas de API durante o batch.
 - The 9:16 crop assumes the subject is centered. If not, the user needs to adjust crop positioning.
 - Language defaults to `pt` (Portuguese). Ask user if content is in another language.
