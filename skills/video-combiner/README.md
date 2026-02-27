@@ -1,46 +1,46 @@
 # Video Combiner
 
-Combine Hook + Body + CTA video segments into all possible ad variations with auto-generated subtitles in multiple aspect ratios.
+Combina segmentos de video Hook + Body + CTA em todas as variacoes possiveis de ads com legendas automaticas em multiplos aspect ratios.
 
-## What it does
+## O que faz
 
-- Takes video folders organized as Hook/Body/CTA
-- Generates all possible combinations (e.g., 7 hooks x 6 bodies x 3 CTAs = 126 variations)
-- Auto-transcribes audio with Whisper and burns subtitles
-- Outputs in multiple formats: 16:9, 9:16, 4:5, 1:1
-- Works with Google Drive or local files
+- Recebe pastas de video organizadas como Hook/Body/CTA
+- Gera todas as combinacoes possiveis (ex: 7 hooks x 6 bodys x 3 CTAs = 126 variacoes)
+- Transcreve audio automaticamente com Whisper e queima legendas
+- Exporta em multiplos formatos: 16:9, 9:16, 4:5, 1:1
+- Funciona com Google Drive ou arquivos locais
 
-## Install
+## Instalar
 
-**Paste in G4 OS:**
+**Colar no G4 OS:**
 ```
-Install the skill "video-combiner" from https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone the repo, copy skills/video-combiner/ to my G4 OS skills directory, install dependencies (brew install ffmpeg whisper-cpp), and confirm it's working.
+Instale o skill "video-combiner" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie skills/video-combiner/ para o diretorio de skills do meu G4 OS, instale as dependencias (brew install ffmpeg whisper-cpp), e confirme que esta funcionando.
 ```
 
-**Or via terminal:**
+**Ou via terminal:**
 ```bash
 curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- skills/video-combiner
 ```
 
-### Dependencies
+### Dependencias
 
 ```bash
 brew install ffmpeg whisper-cpp
 ```
 
-## Usage
+## Uso
 
-In G4 OS:
+No G4 OS:
 
-> "Combinar videos da pasta X" or "Gerar variacoes de ads"
+> "Combinar videos da pasta X" ou "Gerar variacoes de ads"
 
-The skill walks you through a setup interview, runs a test combination for approval, then batch-processes everything.
+O skill guia voce por uma entrevista de setup, roda uma combinacao de teste para aprovacao, e depois processa tudo em lote.
 
-## Files
+## Arquivos
 
-| File | Purpose |
-|------|---------|
-| `SKILL.md` | Skill definition and workflow phases |
-| `icon.svg` | Film strip icon |
-| `references/technical.md` | FFmpeg recipes, ASS subtitle format, encoding params |
-| `scripts/batch_combine.py` | Python batch processing script (standalone CLI) |
+| Arquivo | Funcao |
+|---------|--------|
+| `SKILL.md` | Definicao do skill e fases do workflow |
+| `icon.svg` | Icone de filmstrip |
+| `references/technical.md` | Receitas FFmpeg, formato de legenda ASS, parametros de encoding |
+| `scripts/batch_combine.py` | Script Python de processamento em lote (CLI standalone) |

@@ -1,134 +1,134 @@
 # G4 OS Skills & Workflows
 
-Community skills and workflows for [G4 OS](https://g4os.dev) — the AI Chief of Staff platform.
+Skills e workflows da comunidade para o [G4 OS](https://g4os.dev) — a plataforma de AI Chief of Staff.
 
-Skills are single-purpose tools. Workflows are multi-phase processes with knowledge bases. Both install with one command.
+Skills sao ferramentas de proposito unico. Workflows sao processos multi-fase com bases de conhecimento. Ambos se instalam com um comando.
 
 ---
 
-## Catalog
+## Catalogo
 
 ### Skills
 
-| Skill | Description | Install |
-|-------|-------------|---------|
-| **[Humanize Writing](skills/humanize/)** | Rewrite content to sound naturally human. Removes 18 AI writing patterns from Wikipedia's "Signs of AI writing" | `skills/humanize` |
-| **[Video Combiner](skills/video-combiner/)** | Combine Hook + Body + CTA video segments into ad variations with auto-subtitles in multiple aspect ratios | `skills/video-combiner` |
+| Skill | Descricao | Instalar |
+|-------|-----------|----------|
+| **[Humanize Writing](skills/humanize/)** | Reescreve conteudo para soar naturalmente humano. Remove 18 padroes de escrita AI segundo a Wikipedia. *Para textos em ingles.* | `skills/humanize` |
+| **[Video Combiner](skills/video-combiner/)** | Combina segmentos de video Hook + Body + CTA em variacoes de ads com legendas automaticas em multiplos aspect ratios | `skills/video-combiner` |
 
 ### Workflows
 
-| Workflow | Description | Install |
-|----------|-------------|---------|
-| **[Onde Usar IA](workflows/onde-usar-ia/)** | Diagnostico interativo de IA generativa — matriz 2x2, business case quantificado, demo ao vivo. PT-BR | `workflows/onde-usar-ia` |
+| Workflow | Descricao | Instalar |
+|----------|-----------|----------|
+| **[Onde Usar IA](workflows/onde-usar-ia/)** | Diagnostico interativo de IA generativa — matriz 2x2, business case quantificado, demo ao vivo | `workflows/onde-usar-ia` |
 
 ---
 
-## Install
+## Instalacao
 
-### Option A: Paste in G4 OS (recommended)
+### Opcao A: Colar no G4 OS (recomendado)
 
-Copy and paste one of these prompts into a G4 OS conversation:
+Copie e cole um desses prompts em uma conversa do G4 OS:
 
 **Humanize Writing:**
 ```
-Install the skill "humanize" from https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone the repo, copy skills/humanize/ to my G4 OS skills directory, and confirm it's working.
+Instale o skill "humanize" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie skills/humanize/ para o diretorio de skills do meu G4 OS, e confirme que esta funcionando.
 ```
 
 **Video Combiner:**
 ```
-Install the skill "video-combiner" from https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone the repo, copy skills/video-combiner/ to my G4 OS skills directory, and confirm it's working.
+Instale o skill "video-combiner" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie skills/video-combiner/ para o diretorio de skills do meu G4 OS, instale as dependencias (brew install ffmpeg whisper-cpp), e confirme que esta funcionando.
 ```
 
 **Onde Usar IA:**
 ```
-Install the workflow "onde-usar-ia" from https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone the repo, copy workflows/onde-usar-ia/ to my G4 OS workflows directory, then run data/download.sh to fetch the scoring datasets. Confirm it's working.
+Instale o workflow "onde-usar-ia" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie workflows/onde-usar-ia/ para o diretorio de workflows do meu G4 OS, depois execute data/download.sh para baixar os datasets de scoring. Confirme que esta funcionando.
 ```
 
-G4 OS will handle the git clone, copy to the right workspace path, and verify the installation.
+O G4 OS cuida do git clone, copia para o caminho correto do workspace, e verifica a instalacao.
 
-### Option B: Shell one-liner
+### Opcao B: Comando no terminal
 
 ```bash
-curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- <path>
+curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- <caminho>
 ```
 
-**Examples:**
+**Exemplos:**
 
 ```bash
-# Install the humanize skill
+# Instalar o skill humanize
 curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- skills/humanize
 
-# Install the onde-usar-ia workflow
+# Instalar o workflow onde-usar-ia
 curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- workflows/onde-usar-ia
 ```
 
-### Option C: Manual
+### Opcao C: Manual
 
-Clone the repo and copy the folder you want:
+Clone o repo e copie a pasta desejada:
 
 ```bash
 git clone https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills.git
-cp -r g4os-skills/skills/humanize ~/.g4os/workspaces/<your-workspace>/skills/
+cp -r g4os-skills/skills/humanize ~/.g4os/workspaces/<seu-workspace>/skills/
 ```
 
 ---
 
-## How skills work
+## Como funciona
 
-A skill is a folder with a `SKILL.md` file:
-
-```
-my-skill/
-├── SKILL.md          # Required: YAML frontmatter + instructions
-├── icon.svg          # Optional: icon for the UI
-├── references/       # Optional: reference documents loaded on demand
-└── scripts/          # Optional: executable scripts
-```
-
-A workflow is a folder with a `WORKFLOW.md` file:
+Um skill e uma pasta com um arquivo `SKILL.md`:
 
 ```
-my-workflow/
-├── WORKFLOW.md       # Required: YAML frontmatter + multi-phase instructions
-└── knowledge/        # Optional: domain knowledge files
+meu-skill/
+├── SKILL.md          # Obrigatorio: YAML frontmatter + instrucoes
+├── icon.svg          # Opcional: icone para a UI
+├── references/       # Opcional: documentos de referencia carregados sob demanda
+└── scripts/          # Opcional: scripts executaveis
 ```
 
-### SKILL.md / WORKFLOW.md format
+Um workflow e uma pasta com um arquivo `WORKFLOW.md`:
+
+```
+meu-workflow/
+├── WORKFLOW.md       # Obrigatorio: YAML frontmatter + instrucoes multi-fase
+└── knowledge/        # Opcional: arquivos de conhecimento do dominio
+```
+
+### Formato do SKILL.md / WORKFLOW.md
 
 ```yaml
 ---
-name: "Display Name"
-description: "What it does and when to trigger it"
-icon: "🔧"                              # optional emoji
+name: "Nome de Exibicao"
+description: "O que faz e quando acionar"
+icon: "🔧"                              # emoji opcional
 ---
 
-# Instructions
+# Instrucoes
 
-The markdown body contains the instructions that G4 OS follows
-when this skill/workflow is active.
+O corpo em markdown contem as instrucoes que o G4 OS segue
+quando este skill/workflow esta ativo.
 ```
 
-G4 OS auto-discovers skills and workflows from the filesystem. No registration step needed.
+O G4 OS descobre skills e workflows automaticamente pelo filesystem. Nenhum passo de registro necessario.
 
 ---
 
-## Contributing
+## Contribuindo
 
-1. Fork this repo
-2. Create a new folder under `skills/` or `workflows/`
-3. Add a `SKILL.md` or `WORKFLOW.md` with valid frontmatter
-4. Add a `README.md` with description and install command
-5. Submit a PR
+1. Fork este repo
+2. Crie uma nova pasta em `skills/` ou `workflows/`
+3. Adicione um `SKILL.md` ou `WORKFLOW.md` com frontmatter valido
+4. Adicione um `README.md` com descricao e comando de instalacao
+5. Envie um PR
 
-### Guidelines
+### Diretrizes
 
-- Keep the main definition file under 500 lines. Move detailed reference material to `references/` or `knowledge/`
-- No hardcoded paths — use relative paths or `$HOME`
-- Include a `README.md` with the one-line install command
-- Test the install script before submitting
+- Mantenha o arquivo principal de definicao abaixo de 500 linhas. Mova material de referencia detalhado para `references/` ou `knowledge/`
+- Sem caminhos hardcoded — use caminhos relativos ou `$HOME`
+- Inclua um `README.md` com o comando de instalacao
+- Teste o script de instalacao antes de submeter
 
 ---
 
-## License
+## Licenca
 
 MIT

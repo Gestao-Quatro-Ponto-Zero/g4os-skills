@@ -1,8 +1,8 @@
 #!/bin/bash
 # G4 OS Skills Installer
-# Usage: curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- <type>/<slug>
+# Uso: curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- <tipo>/<slug>
 #
-# Examples:
+# Exemplos:
 #   curl -sL .../install.sh | bash -s -- skills/humanize
 #   curl -sL .../install.sh | bash -s -- workflows/onde-usar-ia
 
@@ -13,63 +13,63 @@ BRANCH="main"
 TARGET_PATH="${1:-}"
 
 if [ -z "$TARGET_PATH" ]; then
-  echo "Usage: $0 <type>/<slug>"
+  echo "Uso: $0 <tipo>/<slug>"
   echo ""
-  echo "Available:"
-  echo "  skills/humanize          - Rewrite content to sound naturally human"
-  echo "  skills/video-combiner    - Combine Hook+Body+CTA video segments"
-  echo "  workflows/onde-usar-ia   - AI implementation diagnostic (PT-BR)"
+  echo "Disponiveis:"
+  echo "  skills/humanize          - Reescreve conteudo para soar naturalmente humano"
+  echo "  skills/video-combiner    - Combina segmentos de video Hook+Body+CTA"
+  echo "  workflows/onde-usar-ia   - Diagnostico de implementacao de IA"
   echo ""
-  echo "Example:"
+  echo "Exemplo:"
   echo "  curl -sL https://raw.githubusercontent.com/$REPO/$BRANCH/install.sh | bash -s -- skills/humanize"
   exit 1
 fi
 
-# Parse type and slug
+# Extrair tipo e slug
 TYPE=$(echo "$TARGET_PATH" | cut -d'/' -f1)
 SLUG=$(echo "$TARGET_PATH" | cut -d'/' -f2)
 
 if [ "$TYPE" != "skills" ] && [ "$TYPE" != "workflows" ]; then
-  echo "Error: Type must be 'skills' or 'workflows', got '$TYPE'"
+  echo "Erro: Tipo deve ser 'skills' ou 'workflows', recebido '$TYPE'"
   exit 1
 fi
 
-# Find G4 OS workspace
+# Encontrar workspace do G4 OS
 G4OS_DIR="$HOME/.g4os/workspaces"
 if [ ! -d "$G4OS_DIR" ]; then
-  echo "Error: G4 OS workspace directory not found at $G4OS_DIR"
-  echo "Make sure G4 OS is installed first."
+  echo "Erro: Diretorio de workspace do G4 OS nao encontrado em $G4OS_DIR"
+  echo "Certifique-se de que o G4 OS esta instalado."
   exit 1
 fi
 
-# Find the active workspace (first directory)
+# Encontrar o workspace ativo (primeiro diretorio)
 WORKSPACE=$(ls -1 "$G4OS_DIR" | head -n1)
 if [ -z "$WORKSPACE" ]; then
-  echo "Error: No G4 OS workspace found"
+  echo "Erro: Nenhum workspace do G4 OS encontrado"
   exit 1
 fi
 
 DEST="$G4OS_DIR/$WORKSPACE/$TYPE/$SLUG"
 
-# Check if already installed
+# Verificar se ja esta instalado
 if [ -d "$DEST" ]; then
-  echo "Warning: $TYPE/$SLUG already exists at $DEST"
-  read -p "Overwrite? [y/N] " -n 1 -r
+  echo "Aviso: $TYPE/$SLUG ja existe em $DEST"
+  read -p "Sobrescrever? [s/N] " -n 1 -r
   echo
-  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Aborted."
+  if [[ ! $REPLY =~ ^[SsYy]$ ]]; then
+    echo "Cancelado."
     exit 0
   fi
   rm -rf "$DEST"
 fi
 
-echo "Installing $TYPE/$SLUG to $DEST..."
+echo "Instalando $TYPE/$SLUG em $DEST..."
 
-# Create temp directory
+# Criar diretorio temporario
 TMPDIR=$(mktemp -d)
 trap "rm -rf $TMPDIR" EXIT
 
-# Download using git sparse checkout (or fallback to tarball)
+# Download via git sparse checkout (ou fallback para tarball)
 if command -v git &> /dev/null; then
   cd "$TMPDIR"
   git init -q
@@ -82,11 +82,11 @@ if command -v git &> /dev/null; then
     mkdir -p "$(dirname "$DEST")"
     cp -r "$TARGET_PATH" "$DEST"
   else
-    echo "Error: $TARGET_PATH not found in repository"
+    echo "Erro: $TARGET_PATH nao encontrado no repositorio"
     exit 1
   fi
 else
-  # Fallback: download tarball and extract
+  # Fallback: baixar tarball e extrair
   curl -sL "https://github.com/$REPO/archive/$BRANCH.tar.gz" -o "$TMPDIR/repo.tar.gz"
   tar -xzf "$TMPDIR/repo.tar.gz" -C "$TMPDIR"
 
@@ -95,28 +95,28 @@ else
     mkdir -p "$(dirname "$DEST")"
     cp -r "$EXTRACTED" "$DEST"
   else
-    echo "Error: $TARGET_PATH not found in repository"
+    echo "Erro: $TARGET_PATH nao encontrado no repositorio"
     exit 1
   fi
 fi
 
-# Verify installation
+# Verificar instalacao
 if [ "$TYPE" = "skills" ] && [ -f "$DEST/SKILL.md" ]; then
   NAME=$(grep '^name:' "$DEST/SKILL.md" | head -1 | sed 's/name: *"\(.*\)"/\1/')
   echo ""
-  echo "Installed: $NAME"
-  echo "Location: $DEST"
+  echo "Instalado: $NAME"
+  echo "Local: $DEST"
   echo ""
-  echo "The skill is now available in G4 OS. Start a new conversation to use it."
+  echo "O skill ja esta disponivel no G4 OS. Inicie uma nova conversa para usa-lo."
 elif [ "$TYPE" = "workflows" ] && [ -f "$DEST/WORKFLOW.md" ]; then
   NAME=$(grep '^name:' "$DEST/WORKFLOW.md" | head -1 | sed 's/name: *"\(.*\)"/\1/')
   echo ""
-  echo "Installed: $NAME"
-  echo "Location: $DEST"
+  echo "Instalado: $NAME"
+  echo "Local: $DEST"
   echo ""
-  echo "The workflow is now available in G4 OS. Type /$SLUG to use it."
+  echo "O workflow ja esta disponivel no G4 OS. Digite /$SLUG para usa-lo."
 else
   echo ""
-  echo "Warning: Installation completed but definition file not found."
-  echo "Location: $DEST"
+  echo "Aviso: Instalacao concluida mas arquivo de definicao nao encontrado."
+  echo "Local: $DEST"
 fi

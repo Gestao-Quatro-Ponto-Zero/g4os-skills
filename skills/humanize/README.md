@@ -1,38 +1,40 @@
 # Humanize Writing
 
-Rewrite or create content that sounds naturally human. Removes all 18 AI writing patterns identified by Wikipedia's "Signs of AI writing" guide.
+Reescreve ou cria conteudo que soa naturalmente humano. Remove todos os 18 padroes de escrita AI identificados pelo guia "Signs of AI writing" da Wikipedia.
 
-## What it does
+> **Nota**: Este skill e voltado para textos em **ingles**. Os anti-padroes sao especificos da escrita AI em ingles (puffery, participial padding, AI vocabulary, etc.).
 
-- Takes AI-generated or stilted text and rewrites it to sound natural
-- Creates new content from scratch without AI patterns
-- Applies 18 specific anti-pattern rules (puffery, participial padding, AI vocabulary, etc.)
+## O que faz
 
-## Install
+- Pega texto gerado por AI ou texto rigido e reescreve para soar natural
+- Cria conteudo novo do zero sem padroes de AI
+- Aplica 18 regras especificas de anti-padroes
 
-**Paste in G4 OS:**
+## Instalar
+
+**Colar no G4 OS:**
 ```
-Install the skill "humanize" from https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone the repo, copy skills/humanize/ to my G4 OS skills directory, and confirm it's working.
+Instale o skill "humanize" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie skills/humanize/ para o diretorio de skills do meu G4 OS, e confirme que esta funcionando.
 ```
 
-**Or via terminal:**
+**Ou via terminal:**
 ```bash
 curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- skills/humanize
 ```
 
-## Usage
+## Uso
 
-In G4 OS, just ask:
+No G4 OS, basta pedir:
 
-> "Humanize this text: [paste text]"
+> "Humanize this text: [cole o texto]"
 
-Or:
+Ou:
 
-> "Write a blog post about X" (skill activates automatically when writing is involved)
+> "Write a blog post about X" (o skill ativa automaticamente quando envolve escrita)
 
-## Files
+## Arquivos
 
-| File | Purpose |
-|------|---------|
-| `SKILL.md` | Skill definition with all 18 anti-pattern rules |
-| `icon.svg` | Pen/edit icon |
+| Arquivo | Funcao |
+|---------|--------|
+| `SKILL.md` | Definicao do skill com todas as 18 regras de anti-padroes (em ingles) |
+| `icon.svg` | Icone de caneta/edicao |
