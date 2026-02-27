@@ -1,0 +1,16 @@
+name: g4os-skills
+id: ari:cloud:compass:752ee8d2-042d-435c-8bee-e942d7afcef2:component/b2177de5-7d3b-4376-b095-4513b1fb4710/15841745-716a-494e-a0db-c8cb6ec1947b
+description: Community skills and workflows for G4 OS — the AI Chief of Staff platform
+configVersion: 1
+typeId: SERVICE
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills
+relationships:
+  DEPENDS_ON: []
+labels:
+  - source:github
+customFields: null
