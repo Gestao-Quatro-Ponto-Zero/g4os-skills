@@ -20,6 +20,17 @@ Baseado em dados do Anthropic Economic Index (milhoes de conversas) e GDPVal (22
 curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- workflows/onde-usar-ia
 ```
 
+## Dados (opcional)
+
+O workflow usa dados do Anthropic Economic Index para scoring mais preciso. Funciona sem eles (usa estimativa), mas com os dados a confianca e maior.
+
+```bash
+cd ~/.g4os/workspaces/<workspace>/workflows/onde-usar-ia/data/
+./download.sh
+```
+
+Detalhes em [`data/README.md`](data/README.md).
+
 ## Usar
 
 No G4 OS, digite:
@@ -42,3 +53,5 @@ Ou simplesmente:
 | `knowledge/g4os-capabilities.md` | Capacidades do G4 OS por categoria |
 | `knowledge/occupation-mappings.md` | Mapeamento cargos brasileiros → O*NET |
 | `knowledge/prompt-building-guide.md` | Framework RCDEF com exemplos por area |
+| `data/README.md` | Instrucoes de download dos datasets AEI e GDPVal |
+| `data/download.sh` | Script de download automatico |

@@ -28,15 +28,19 @@ O dataset AEI tem ~3.500 tarefas em ingles. Atividades descritas em portugues ra
 
 ### Fontes de Dados
 
-If you have the AEI/GDPVal datasets available locally, place them in a `data/` directory:
+The workflow includes a `data/` directory with download instructions (see `data/README.md`). Run `data/download.sh` to fetch the datasets from HuggingFace.
+
+After download + first workflow run, the data directory will contain:
 
 ```
 data/
-  v4_task_ai_scores_lookup.json  → Scores por tarefa (chaves LOWERCASE)
-  occupation_ai_summary.json     → Resumo por ocupacao (avg/max AI usage)
-  onet_task_mappings.csv         → % de conversas Claude por tarefa
-  onet_task_statements.csv       → Lista de tarefas por ocupacao O*NET
+  onet_task_statements.csv       → Lista de tarefas por ocupacao O*NET (download)
+  onet_task_mappings.csv         → % de conversas Claude por tarefa (download)
+  v4_task_ai_scores_lookup.json  → Scores por tarefa, chaves LOWERCASE (gerado)
+  occupation_ai_summary.json     → Resumo por ocupacao, avg/max AI usage (gerado)
 ```
+
+**Sem os dados**: o workflow funciona normalmente — usa estimativa do modelo (confianca "Media" ou "Baixa" ao inves de "Alta").
 
 ### Como buscar dados
 

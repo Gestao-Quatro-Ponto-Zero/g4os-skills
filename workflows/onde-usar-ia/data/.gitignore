@@ -1,0 +1,10 @@
+# Data files are downloaded, not committed
+*.csv
+*.json
+*.parquet
+gdpval/
+
+# Keep the README and download script
+!README.md
+!download.sh
+!.gitignore
