@@ -25,9 +25,28 @@ Skills are single-purpose tools. Workflows are multi-phase processes with knowle
 
 ## Install
 
-### One-line install
+### Option A: Paste in G4 OS (recommended)
 
-Pick a skill or workflow from the catalog above and run:
+Copy and paste one of these prompts into a G4 OS conversation:
+
+**Humanize Writing:**
+```
+Install the skill "humanize" from https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone the repo, copy skills/humanize/ to my G4 OS skills directory, and confirm it's working.
+```
+
+**Video Combiner:**
+```
+Install the skill "video-combiner" from https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone the repo, copy skills/video-combiner/ to my G4 OS skills directory, and confirm it's working.
+```
+
+**Onde Usar IA:**
+```
+Install the workflow "onde-usar-ia" from https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone the repo, copy workflows/onde-usar-ia/ to my G4 OS workflows directory, then run data/download.sh to fetch the scoring datasets. Confirm it's working.
+```
+
+G4 OS will handle the git clone, copy to the right workspace path, and verify the installation.
+
+### Option B: Shell one-liner
 
 ```bash
 curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- <path>
@@ -43,9 +62,7 @@ curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/
 curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- workflows/onde-usar-ia
 ```
 
-The installer detects your G4 OS workspace and copies the skill/workflow to the right location. Start a new G4 OS conversation to use it.
-
-### Manual install
+### Option C: Manual
 
 Clone the repo and copy the folder you want:
 

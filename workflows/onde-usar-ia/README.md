@@ -16,14 +16,21 @@ Baseado em dados do Anthropic Economic Index (milhoes de conversas) e GDPVal (22
 
 ## Instalar
 
+**Cole no G4 OS:**
+```
+Instala o workflow "onde-usar-ia" do repositorio https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clona o repo, copia workflows/onde-usar-ia/ para o diretorio de workflows do meu G4 OS, depois roda data/download.sh para baixar os datasets de scoring. Confirma que esta funcionando.
+```
+
+**Ou via terminal:**
 ```bash
 curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- workflows/onde-usar-ia
 ```
 
 ## Dados (opcional)
 
-O workflow usa dados do Anthropic Economic Index para scoring mais preciso. Funciona sem eles (usa estimativa), mas com os dados a confianca e maior.
+O workflow usa dados do Anthropic Economic Index para scoring mais preciso. Funciona sem eles (usa estimativa), mas com os dados a confianca e maior. Se instalou via G4 OS (acima), os dados ja foram baixados automaticamente.
 
+Download manual:
 ```bash
 cd ~/.g4os/workspaces/<workspace>/workflows/onde-usar-ia/data/
 ./download.sh

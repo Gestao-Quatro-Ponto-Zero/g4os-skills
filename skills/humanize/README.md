@@ -10,6 +10,12 @@ Rewrite or create content that sounds naturally human. Removes all 18 AI writing
 
 ## Install
 
+**Paste in G4 OS:**
+```
+Install the skill "humanize" from https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone the repo, copy skills/humanize/ to my G4 OS skills directory, and confirm it's working.
+```
+
+**Or via terminal:**
 ```bash
 curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- skills/humanize
 ```

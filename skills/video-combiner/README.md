@@ -12,6 +12,12 @@ Combine Hook + Body + CTA video segments into all possible ad variations with au
 
 ## Install
 
+**Paste in G4 OS:**
+```
+Install the skill "video-combiner" from https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone the repo, copy skills/video-combiner/ to my G4 OS skills directory, install dependencies (brew install ffmpeg whisper-cpp), and confirm it's working.
+```
+
+**Or via terminal:**
 ```bash
 curl -sL https://raw.githubusercontent.com/Gestao-Quatro-Ponto-Zero/g4os-skills/main/install.sh | bash -s -- skills/video-combiner
 ```
