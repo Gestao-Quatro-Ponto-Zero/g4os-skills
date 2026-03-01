@@ -20,6 +20,7 @@ Skills sao ferramentas de proposito unico. Workflows sao processos multi-fase co
 | Workflow | Descricao | Instalar |
 |----------|-----------|----------|
 | **[Onde Usar IA](workflows/onde-usar-ia/)** | Diagnostico interativo de IA generativa — matriz 2x2, business case quantificado, demo ao vivo | `workflows/onde-usar-ia` |
+| **[Cortes Virais](workflows/cortes-virais/)** | Transforma entrevistas/podcasts do YouTube em 5-7 cortes verticais (9:16) de 60-90s com hook teaser e legendas dinamicas | `workflows/cortes-virais` |
 
 ---
 
@@ -42,6 +43,11 @@ Instale o skill "video-combiner" de https://github.com/Gestao-Quatro-Ponto-Zero/
 **Onde Usar IA:**
 ```
 Instale o workflow "onde-usar-ia" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie workflows/onde-usar-ia/ para o diretorio de workflows do meu G4 OS, depois execute data/download.sh para baixar os datasets de scoring. Confirme que esta funcionando.
+```
+
+**Cortes Virais:**
+```
+Instale o workflow "cortes-virais" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie workflows/cortes-virais/ para o diretorio de workflows do meu G4 OS, instale as dependencias (brew install yt-dlp ffmpeg whisper-cpp + download do modelo ggml-medium.bin), e confirme que esta funcionando.
 ```
 
 O G4 OS cuida do git clone, copia para o caminho correto do workspace, e verifica a instalacao.
