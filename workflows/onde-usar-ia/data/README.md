@@ -47,7 +47,22 @@ Estes arquivos sao gerados no primeiro uso se voce tiver os dados brutos acima:
 
 Para gera-los, execute o workflow e ele processa os CSVs em JSONs de lookup. Ou peca ao G4 OS: "Processe os dados do AEI em arquivos de lookup."
 
-## Dataset 2: GDPVal (Opcional)
+## Dataset 2: METR Horizon v1.1 (Incluido)
+
+Fonte: METR Horizon Benchmark
+Licenca: Dados publicos
+
+| Arquivo | Tamanho | Conteudo |
+|---------|---------|----------|
+| `metr_horizon_v1_1.yaml` | ~12 KB | Horizontes de tempo p50/p80 por modelo de IA, com intervalos de confianca |
+
+Este dataset e a **referencia primaria** para scoring de capacidade de IA. Ja esta incluido no repositorio — nao precisa de download.
+
+O arquivo contem dados de ~25 modelos (de GPT-2 a Claude Opus 4.6) com metricas de horizonte de tempo — a duracao maxima de tarefa que cada modelo completa com 50% ou 80% de taxa de sucesso.
+
+Ver `knowledge/metr-horizon-reference.md` para a tabela formatada e a metodologia de scoring.
+
+## Dataset 3: GDPVal (Opcional)
 
 Fonte: [OpenAI GDP Validation dataset](https://github.com/openai/evals)
 Licenca: MIT
@@ -64,6 +79,7 @@ Este dataset enriquece o guia de construcao de prompts com exemplos reais. O wor
 data/
 ├── README.md                        # Este arquivo
 ├── download.sh                      # Script de download
+├── metr_horizon_v1_1.yaml           # METR Horizon v1.1 (incluido)
 ├── onet_task_statements.csv         # Tarefas O*NET (do HuggingFace)
 ├── onet_task_mappings.csv           # Tarefa → % conversas (do HuggingFace)
 ├── v4_task_ai_scores_lookup.json    # Gerado: scores de AI por tarefa
@@ -74,9 +90,9 @@ data/
 
 ## Sem Arquivos de Dados
 
-Se voce nao baixar os arquivos de dados, o workflow vai:
-1. Usar conhecimento do modelo para estimar scores de capacidade de AI (marcados como "estimativa")
-2. Pular lookups baseados em dados
-3. Ainda produzir um diagnostico completo — apenas com scores de confianca menor
+Se voce nao baixar os arquivos AEI, o workflow vai:
+1. Usar o **METR Horizon** (incluido) como referencia primaria para capacidade de IA — comparando duracao da tarefa com o horizonte do modelo
+2. Pular validacao contra dados AEI
+3. Ainda produzir um diagnostico completo com alta confianca para a dimensao de capacidade IA
 
-O guia de scoring (`knowledge/scoring-guide.md`) documenta exatamente como a estimativa funciona sem dados.
+O METR Horizon (`metr_horizon_v1_1.yaml`) ja esta incluido e e suficiente para scoring. Os dados AEI enriquecem a validacao mas nao sao obrigatorios.

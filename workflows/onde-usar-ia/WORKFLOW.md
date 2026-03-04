@@ -6,9 +6,11 @@ icon: "🤖"
 
 # Onde Usar IA — Diagnostico de IA Generativa
 
-Workflow interativo que ajuda profissionais e times a descobrir **onde e como usar IA generativa** no trabalho. Baseado em dados de milhoes de conversas com IA (Anthropic Economic Index) + 220 tarefas profissionais validadas (GDPVal/OpenAI).
+Workflow interativo que ajuda profissionais e times a descobrir **onde e como usar IA generativa** no trabalho. Usa o **METR Horizon** como referencia empirica primaria — o benchmark que mede ate que duracao de tarefa modelos de IA conseguem executar com alta taxa de sucesso. Complementado por dados do Anthropic Economic Index (AEI, milhoes de conversas) + 220 tarefas profissionais validadas (GDPVal/OpenAI).
 
-**Nota**: Diagnostico agnostico de ferramenta. Dados do Claude servem de referencia (mais completos disponiveis), mas recomendacoes valem para qualquer IA generativa. O que importa e a TAREFA, nao a ferramenta.
+**Principio central**: Se uma tarefa leva X horas para um humano e X esta dentro do horizonte p80 do modelo de IA, a IA provavelmente consegue executa-la com >80% de sucesso — desde que seja uma tarefa digital (executada em computador).
+
+**Nota**: Diagnostico agnostico de ferramenta. O scoring ajusta automaticamente conforme o modelo/ferramenta que o usuario utiliza (ChatGPT, Claude, Gemini, Copilot). O que importa e a TAREFA vs o HORIZONTE do modelo.
 
 ## Sources & Integracoes
 
@@ -158,12 +160,15 @@ Para cada atividade, calcule **3 scores independentes** (1-5):
 | **Impacto de negocio** | 40% | Quanto tempo/dinheiro economiza | frequencia x tempo x pessoas |
 | **Facilidade de implementacao** | 20% | Quao facil e colocar pra rodar | dados prontos? ferramenta existe? |
 
-**Capacidade IA — abordagem honesta:**
-1. Busque tarefas similares nos dados AEI/O*NET
-2. Se houver match direto ou proximo → use os dados → marque como `dados`
-3. Se nao houver → use o conhecimento do modelo sobre o estado da arte de IA generativa → marque como `estimativa`
-4. **Nunca force um fuzzy match ruim**. Se "Registrar chamados em sistema" nao tem match claro, estimar baseado no que se sabe sobre IA + data entry e mais honesto que matchar com uma tarefa de psicologia
-5. Ao apresentar, seja transparente: "Baseado em padroes de milhoes de conversas com IA, atividades como classificacao de texto tendem a ter alta autonomia (4+), enquanto tarefas que exigem julgamento sobre prioridade de pessoas ficam em 2-3."
+**Capacidade IA — metodologia METR Horizon:**
+1. Use o **tempo por ocorrencia** da tarefa (coletado na Fase 3) como input primario
+2. Verifique a **pre-condicao digital**: a tarefa e executada primariamente em computador? Se nao → score maximo = 2
+3. Compare o tempo com o **horizonte do modelo de referencia** do usuario (capturado na Fase 2 — qual IA usam)
+4. Aplique **modificadores qualitativos** (repetitiva? dados estruturados? contexto organizacional?)
+5. Opcionalmente, valide contra dados **AEI** se houver match direto
+6. Ao apresentar, seja transparente: "Baseado no METR Horizon, tarefas de ate Xh estao dentro da faixa de >80% de sucesso dos modelos atuais. Como essa atividade leva ~Ymin e e repetitiva/estruturada, o score de capacidade IA e Z."
+
+Ver `knowledge/scoring-guide.md` e `knowledge/metr-horizon-reference.md` para a metodologia completa, tabela de modelos, e intervalos de confianca.
 
 **Impacto de negocio:**
 ```
@@ -194,12 +199,12 @@ Score 1: Projeto complexo (meses, multiplos stakeholders)
 Onde `Score Final` = (IA x 0.4) + (Impacto x 0.4) + (Facilidade x 0.2)
 
 E `Confianca`:
-- **Alta** = Match direto nos dados + volume claro do aluno
-- **Media** = Estimativa informada + volume aproximado
-- **Baixa** = Sem dados de referencia, baseado em knowledge geral
+- **Alta** = Duracao clara + dentro do p80 METR + validacao AEI + volume claro do aluno
+- **Media** = Duracao estimada + dentro do horizonte mas sem validacao AEI
+- **Baixa** = Duracao incerta, tarefa no limite entre faixas, ou contexto vago
 
 **Explique os scores em linguagem natural, nao como lista seca.** Exemplo:
-> "Classificar e rotear chamados" tem score 4.4 — a IA e excelente em classificacao de texto (4.5, baseado em dados reais de 458K conversas), o impacto e alto porque sao 80 chamados/dia x 5min = ~7h/dia do time (5), e a facilidade e media (3) porque precisa integrar com o Zendesk.
+> "Classificar e rotear chamados" tem score 4.4 — cada chamado leva ~5min (bem dentro do horizonte p80 de 70h dos modelos atuais) e e repetitivo/estruturado, o que da IA score 5. O impacto e alto porque sao 80 chamados/dia x 5min = ~7h/dia do time (5), e a facilidade e media (3) porque precisa integrar com o Zendesk.
 
 ---
 
@@ -277,7 +282,7 @@ Apresente o impacto total:
 > - **X atividades para AUTOMATIZAR** — potencial de economia de Xh/mes. Prioridade #1.
 > - **X atividades para AMPLIFICAR** — ganho de produtividade de ~X%. Use IA como copiloto.
 > - **X atividades para QUEBRAR** — IA limitada hoje, mas X sub-tarefas ja sao automatizaveis.
-> - **X atividades de BAIXA PRIORIDADE** — manter manual, revisitar em Q3 2026.
+> - **X atividades de BAIXA PRIORIDADE** — manter manual, revisitar em 6 meses (horizonte IA dobra a cada ~4 meses).
 >
 > **Impacto total estimado: Xh/mes de time — equivalente a X.X FTEs.**
 
@@ -427,8 +432,9 @@ Espere o aluno escolher. **Nunca termine o workflow sem oferecer o proximo passo
 - Codigo Python quando precisar processar dados
 
 ### Referencias
+- `knowledge/metr-horizon-reference.md` — **METR Horizon**: tabela de modelos, horizontes, escala de capacidade IA, exemplos
+- `knowledge/scoring-guide.md` — Metodologia de scoring multidimensional (3 dimensoes + pesos)
 - `knowledge/discovery-framework.md` — Perguntas de discovery por area
-- `knowledge/scoring-guide.md` — Metodologia de scoring multidimensional
 - `knowledge/action-playbook.md` — Templates de recomendacoes por quadrante
 - `knowledge/anti-patterns.md` — Erros comuns ao implementar IA
 - `knowledge/g4os-capabilities.md` — O que o G4 OS consegue fazer

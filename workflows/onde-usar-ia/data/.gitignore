@@ -4,7 +4,8 @@
 *.parquet
 gdpval/
 
-# Keep the README and download script
+# Keep the README, download script, and METR data
 !README.md
 !download.sh
 !.gitignore
+!metr_horizon_v1_1.yaml

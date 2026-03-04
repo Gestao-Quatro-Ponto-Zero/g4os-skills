@@ -1,0 +1,478 @@
+benchmark_name: METR-Horizon-v1.1
+doubling_time_in_days:
+  all_time_stitched:
+    point_estimate: 187.778
+  from_2023_on:
+    ci_high: 157.336
+    ci_low: 105.26
+    point_estimate: 128.744
+long_tasks_version: 799cc9c4b4483a93fc3445623a49ea1bd74fdeb2
+results:
+  claude_3_5_sonnet_20240620_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.401502
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 22.516722
+        ci_low: 5.441687
+        estimate: 11.395377
+      p80_horizon_length:
+        ci_high: 4.498402
+        ci_low: 0.581256
+        estimate: 1.671757
+    release_date: 2024-06-20
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  claude_3_5_sonnet_20241022_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.452356
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 40.412855
+        ci_low: 9.874824
+        estimate: 20.522872
+      p80_horizon_length:
+        ci_high: 7.247944
+        ci_low: 0.905094
+        estimate: 2.595677
+    release_date: 2024-10-22
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  claude_3_7_sonnet_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.558217
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 107.302719
+        ci_low: 33.385879
+        estimate: 60.388937
+      p80_horizon_length:
+        ci_high: 29.331824
+        ci_low: 4.538607
+        estimate: 12.09179
+    release_date: 2025-02-24
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  claude_3_opus_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.294753
+      is_sota: false
+      p50_horizon_length:
+        ci_high: 8.644877
+        ci_low: 1.676577
+        estimate: 3.952262
+      p80_horizon_length:
+        ci_high: 2.005169
+        ci_low: 0.193369
+        estimate: 0.638973
+    release_date: 2024-03-04
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  claude_4_1_opus_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.615713
+      is_sota: false
+      p50_horizon_length:
+        ci_high: 158.015405
+        ci_low: 60.105845
+        estimate: 100.472004
+      p80_horizon_length:
+        ci_high: 47.715211
+        ci_low: 10.49816
+        estimate: 23.455761
+    release_date: 2025-08-05
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  claude_4_opus_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.615452
+      is_sota: false
+      p50_horizon_length:
+        ci_high: 163.28087
+        ci_low: 60.36877
+        estimate: 100.366123
+      p80_horizon_length:
+        ci_high: 42.472934
+        ci_low: 8.689914
+        estimate: 20.429752
+    release_date: 2025-05-22
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  claude_opus_4_5_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.73007
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 638.619623
+        ci_low: 160.539157
+        estimate: 292.994594
+      p80_horizon_length:
+        ci_high: 104.745812
+        ci_low: 20.878605
+        estimate: 49.430584
+    release_date: 2025-11-24
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  claude_opus_4_6_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.788644
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 3949.750392
+        ci_low: 319.32091
+        estimate: 718.80683
+      p80_horizon_length:
+        ci_high: 169.697548
+        ci_low: 26.206972
+        estimate: 69.874587
+    release_date: 2026-02-05
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  davinci_002:
+    benchmark_name: METR-Horizon-v1.0
+    metrics:
+      average_score:
+        estimate: 0.161869
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 0.246039
+        ci_low: 0.07102
+        estimate: 0.148793
+      p80_horizon_length:
+        ci_high: 0.062221
+        ci_low: 0.013154
+        estimate: 0.034139
+    release_date: 2020-05-28
+    scaffolds:
+    - modular-public
+    - null
+  gpt_5_3_codex:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.745439
+      is_sota: false
+      p50_horizon_length:
+        ci_high: 858.325814
+        ci_low: 192.048863
+        estimate: 349.530732
+      p80_horizon_length:
+        ci_high: 123.217662
+        ci_low: 22.728306
+        estimate: 54.739407
+    release_date: 2026-02-05
+    scaffolds:
+    - mtb/start_metr_task,triframe_inspect/triframe_agent
+    - ai_rd_fix_embedding/init_solver,use_tools,triframe_inspect/triframe_agent
+    - re_bench_common/init_solver,use_tools,triframe_inspect/triframe_agent
+    - metr_tasks_swaa/init_solver,generate
+    - triframe_inspect/triframe_agent
+  gemini_3_pro:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.709822
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 387.478199
+        ci_low: 136.865815
+        estimate: 224.325884
+      p80_horizon_length:
+        ci_high: 105.52151
+        ci_low: 26.496334
+        estimate: 54.142849
+    release_date: 2025-11-18
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  gpt2:
+    benchmark_name: METR-Horizon-v1.0
+    metrics:
+      average_score:
+        estimate: 0.101046
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 0.130397
+        ci_low: 0.002019
+        estimate: 0.039762
+      p80_horizon_length:
+        ci_high: 0.026215
+        ci_low: 0.000151
+        estimate: 0.005652
+    release_date: 2019-02-14
+    scaffolds:
+    - null
+  gpt_3_5_turbo_instruct:
+    benchmark_name: METR-Horizon-v1.0
+    metrics:
+      average_score:
+        estimate: 0.214611
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 0.989884
+        ci_low: 0.227348
+        estimate: 0.604245
+      p80_horizon_length:
+        ci_high: 0.285643
+        ci_low: 0.051881
+        estimate: 0.1731
+    release_date: 2022-03-15
+    scaffolds:
+    - modular-public
+    - null
+  gpt_4:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.293044
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 7.906991
+        ci_low: 1.959555
+        estimate: 3.987428
+      p80_horizon_length:
+        ci_high: 2.565517
+        ci_low: 0.353578
+        estimate: 0.889561
+    release_date: 2023-03-14
+    scaffolds:
+    - modular-public
+    - null
+  gpt_4_1106_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.28905
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 8.193214
+        ci_low: 1.952629
+        estimate: 4.044959
+      p80_horizon_length:
+        ci_high: 2.334083
+        ci_low: 0.291717
+        estimate: 0.783032
+    release_date: 2023-11-06
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  gpt_4_turbo_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.271786
+      is_sota: false
+      p50_horizon_length:
+        ci_high: 6.742026
+        ci_low: 1.938233
+        estimate: 3.732787
+      p80_horizon_length:
+        ci_high: 2.229245
+        ci_low: 0.426791
+        estimate: 0.927933
+    release_date: 2024-04-09
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  gpt_4o_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.338424
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 12.414331
+        ci_low: 3.851599
+        estimate: 6.991195
+      p80_horizon_length:
+        ci_high: 2.776774
+        ci_low: 0.551517
+        estimate: 1.267009
+    release_date: 2024-05-13
+    scaffolds:
+    - mtb/start_metr_task,metr_agents/react
+    - ai_rd_fix_embedding/init_solver,use_tools,metr_agents/react
+    - re_bench_common/init_solver,use_tools,metr_agents/react
+    - metr_tasks_swaa/init_solver,generate
+    - metr_agents/react
+  gpt_5_1_codex_max_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.708301
+      is_sota: false
+      p50_horizon_length:
+        ci_high: 395.13675
+        ci_low: 135.214914
+        estimate: 223.714694
+      p80_horizon_length:
+        ci_high: 87.141313
+        ci_low: 26.94592
+        estimate: 50.632499
+    release_date: 2025-11-19
+    scaffolds:
+    - mtb/start_metr_task,triframe_inspect/triframe_agent
+    - ai_rd_fix_embedding/init_solver,use_tools,triframe_inspect/triframe_agent
+    - re_bench_common/init_solver,use_tools,triframe_inspect/triframe_agent
+    - metr_tasks_swaa/init_solver,generate
+    - triframe_inspect/triframe_agent
+  gpt_5_2:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.752875
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 862.339204
+        ci_low: 191.31908
+        estimate: 352.249302
+      p80_horizon_length:
+        ci_high: 133.011471
+        ci_low: 32.15869
+        estimate: 66.002649
+    release_date: 2025-12-11
+    scaffolds:
+    - mtb/start_metr_task,triframe_inspect/triframe_agent
+    - ai_rd_fix_embedding/init_solver,use_tools,triframe_inspect/triframe_agent
+    - re_bench_common/init_solver,use_tools,triframe_inspect/triframe_agent
+    - metr_tasks_swaa/init_solver,generate
+    - triframe_inspect/triframe_agent
+  gpt_5_2025_08_07_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.693697
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 406.743053
+        ci_low: 114.211156
+        estimate: 203.012577
+      p80_horizon_length:
+        ci_high: 70.313466
+        ci_low: 18.558207
+        estimate: 38.312431
+    release_date: 2025-08-07
+    scaffolds:
+    - mtb/start_metr_task,triframe_inspect/triframe_agent
+    - ai_rd_fix_embedding/init_solver,use_tools,triframe_inspect/triframe_agent
+    - re_bench_common/init_solver,use_tools,triframe_inspect/triframe_agent
+    - metr_tasks_swaa/init_solver,generate
+    - triframe_inspect/triframe_agent
+  o1_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.510512
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 67.221467
+        ci_low: 21.687821
+        estimate: 38.831588
+      p80_horizon_length:
+        ci_high: 17.338613
+        ci_low: 2.944768
+        estimate: 7.090121
+    release_date: 2024-12-05
+    scaffolds:
+    - mtb/start_metr_task,triframe_inspect/triframe_agent
+    - ai_rd_fix_embedding/init_solver,use_tools,triframe_inspect/triframe_agent
+    - re_bench_common/init_solver,use_tools,triframe_inspect/triframe_agent
+    - metr_tasks_swaa/init_solver,generate
+    - triframe_inspect/triframe_agent
+  o1_preview:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.451441
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 33.15407
+        ci_low: 11.61017
+        estimate: 20.326586
+      p80_horizon_length:
+        ci_high: 9.245178
+        ci_low: 1.978925
+        estimate: 4.420545
+    release_date: 2024-09-12
+    scaffolds:
+    - duet
+    - null
+  o3_inspect:
+    benchmark_name: METR-Horizon-v1.1
+    metrics:
+      average_score:
+        estimate: 0.636235
+      is_sota: true
+      p50_horizon_length:
+        ci_high: 191.583353
+        ci_low: 72.982684
+        estimate: 119.732634
+      p80_horizon_length:
+        ci_high: 56.861131
+        ci_low: 14.925206
+        estimate: 29.981603
+    release_date: 2025-04-16
+    scaffolds:
+    - mtb/start_metr_task,triframe_inspect/triframe_agent
+    - ai_rd_fix_embedding/init_solver,use_tools,triframe_inspect/triframe_agent
+    - re_bench_common/init_solver,use_tools,triframe_inspect/triframe_agent
+    - metr_tasks_swaa/init_solver,generate
+    - triframe_inspect/triframe_agent
+swaa_version: f6cc84052e2a79dd540766c8a1b15ff399696371

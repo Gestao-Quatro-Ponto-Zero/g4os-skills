@@ -6,7 +6,7 @@ Cada atividade e avaliada em 3 eixos independentes. A combinacao determina prior
 
 | Dimensao | Peso | O que mede | Quem define |
 |----------|-----:|------------|-------------|
-| **Capacidade IA** | 40% | Quao boa a IA e nessa tarefa hoje | Dados AEI + knowledge do modelo |
+| **Capacidade IA** | 40% | Quao boa a IA e nessa tarefa hoje | METR Horizon (duracao vs horizonte do modelo) + AEI como validacao |
 | **Impacto de negocio** | 40% | Quanto tempo/dinheiro economiza | Dados do discovery (volume x tempo x pessoas) |
 | **Facilidade de implementacao** | 20% | Quao facil e colocar pra rodar | Ferramentas disponiveis + maturidade do time |
 
@@ -16,17 +16,70 @@ Cada atividade e avaliada em 3 eixos independentes. A combinacao determina prior
 
 ## Dimensao 1: Capacidade IA (1-5)
 
-### Abordagem Honesta
+### Metodologia: METR Horizon
 
-O dataset AEI tem ~3.500 tarefas em ingles. Atividades descritas em portugues raramente tem match exato. **A abordagem e:**
+A avaliacao de capacidade IA usa o **METR Horizon** como referencia empirica primaria. O METR Horizon mede a duracao maxima de tarefa (em horas de trabalho humano) que modelos de IA completam com determinada taxa de sucesso:
 
-1. **Match direto/proximo nos dados** → Use os scores → Confianca: **Alta**
-2. **Sem match, mas tarefa bem conhecida em IA** → Estime baseado no estado da arte → Confianca: **Media**
-3. **Tarefa ambigua ou niche** → Estime com cautela → Confianca: **Baixa**
+- **p80 Horizon**: Tarefas ate essa duracao → modelo acerta ≥80% — **alta confiabilidade**
+- **p50 Horizon**: Tarefas ate essa duracao → modelo acerta ≥50% — **confiabilidade moderada**
 
-**NUNCA force um fuzzy match ruim.** Se "Registrar chamados no Zendesk" matcha com uma tarefa de psicologia no AEI, e mais honesto estimar do que usar um dado falso.
+**Principio**: Se a tarefa leva T horas para um humano e T esta dentro do p80 horizon do modelo, a IA provavelmente completa com >80% de sucesso. Quanto mais curta a tarefa relativo ao horizonte, mais confiavel.
 
-### Fontes de Dados
+Consulte `knowledge/metr-horizon-reference.md` para a tabela completa de modelos, horizontes, intervalos de confianca, e exemplos praticos.
+
+### Pre-condicao: Tarefa Digital
+
+O METR Horizon mede tarefas executadas em computador. **Pre-filtro obrigatorio:**
+
+- ✅ Tarefa executada primariamente em computador (email, planilha, sistema, codigo, texto, dados)
+- ❌ Tarefa que exige presenca fisica (visita a cliente, trabalho manual, producao)
+- ❌ Tarefa que exige interacao humana em tempo real como componente CENTRAL (negociacao presencial, coaching 1:1)
+- ⚠️ Tarefas hibridas: avaliar a parte digital separadamente
+
+**Se a tarefa nao e digital → Score maximo = 2** (IA pode ajudar na preparacao, mas nao na execucao).
+
+### Modelo de Referencia
+
+O score depende de qual modelo/ferramenta o usuario usa. Capturado na Fase 2 (discovery).
+
+| Ferramenta | Modelo de referencia (Mar 2026) | p80 (h) | p50 (h) |
+|------------|-------------------------------|---------|---------|
+| ChatGPT Plus/Pro/Enterprise | GPT-5.2 | 66 | 352 |
+| Claude Pro / G4 OS | Claude Opus 4.6 | 70 | 719 |
+| Gemini Advanced | Gemini 3 Pro | 54 | 224 |
+| Microsoft Copilot | GPT-5.1 (est.) | 51 | 224 |
+| "Qualquer" / "Nao sei" | Frontier (Claude Opus 4.6) | 70 | 719 |
+
+### Escala de Capacidade IA
+
+Dado **T** = tempo estimado por ocorrencia da tarefa (coletado na Fase 3), e p80/p50 do modelo de referencia do usuario:
+
+| Score | Condicao | Interpretacao |
+|------:|----------|---------------|
+| **5** | T ≤ 2h, digital, estruturada/repetitiva | Dentro do horizonte de todos os modelos atuais. IA completa sozinha |
+| **4** | T ≤ 2h digital (com julgamento), OU T entre 2-12h digital | Maioria dos modelos lida bem. IA faz com supervisao leve |
+| **3** | T entre 12h e p80 do modelo, digital | Dentro do p80 do modelo. IA consegue com setup estruturado |
+| **2** | T entre p80 e p50, OU forte componente contextual/relacional | No limite do horizonte. IA ajuda parcialmente, humano lidera |
+| **1** | T > p50 OU tarefa nao-digital | Alem do horizonte. Ineficaz para automacao end-to-end |
+
+### Modificadores Qualitativos
+
+Apos o score base por duracao, aplicar modificadores:
+
+| Fator | Modificador | Exemplo |
+|-------|------------|---------|
+| Repetitiva / padronizada | +1 (max 5) | Classificar tickets, preencher formularios |
+| Dados estruturados disponiveis | +0.5 (max 5) | Planilha ou banco de dados como input |
+| Contexto organizacional profundo | -1 | Decisoes politicas, historico de cliente longo |
+| Criatividade original | -0.5 | Design grafico original, estrategia inedita |
+| Regulamentado / compliance | -0.5 | Laudos medicos, contratos regulados |
+| Multi-step com dependencias externas | -1 | Aprovacao de terceiros no meio |
+
+**Score final IA = clamp(score_base + modificadores, 1, 5)**
+
+### Dados complementares (AEI)
+
+O dataset AEI (~3.500 tarefas) pode ser usado como **validacao secundaria** quando disponivel:
 
 The workflow includes a `data/` directory with download instructions (see `data/README.md`). Run `data/download.sh` to fetch the datasets from HuggingFace.
 
@@ -38,45 +91,35 @@ data/
   onet_task_mappings.csv         → % de conversas Claude por tarefa (download)
   v4_task_ai_scores_lookup.json  → Scores por tarefa, chaves LOWERCASE (gerado)
   occupation_ai_summary.json     → Resumo por ocupacao, avg/max AI usage (gerado)
+  metr_horizon_v1_1.yaml         → Dados brutos METR Horizon v1.1
 ```
 
-**Sem os dados**: o workflow funciona normalmente — usa estimativa do modelo (confianca "Media" ou "Baixa" ao inves de "Alta").
-
-### Como buscar dados
+**Como usar AEI para validacao:**
 
 ```python
-import json, csv
+import json
 
-# 1. Carregar lookup (chaves lowercase)
+# Carregar lookup (chaves lowercase)
 with open('data/v4_task_ai_scores_lookup.json') as f:
     v4 = json.load(f)
 
-# 2. Buscar por keywords (melhor que fuzzy match por nome completo)
-keyword = "classify"  # ou "email", "report", "analyze"
+# Buscar por keywords
+keyword = "classify"
 matches = {k: v for k, v in v4.items() if keyword in k}
 
-# 3. Para cada match, extrair o score de autonomia
-for task_name, scores in matches.items():
-    autonomy = scores.get('GLOBAL_autonomy_mean', 'N/A')
-    print(f"  {task_name[:60]}... → autonomy: {autonomy}")
+# Se match direto/proximo → confirma ou ajusta o score METR
+# Se conflito → prevalece o METR (mais recente e empirico)
+# Se sem match → confiar no score baseado no METR Horizon
 ```
 
-### Escala de Capacidade IA
-
-| Score | Significado | Indicadores | Exemplos |
-|------:|-------------|-------------|----------|
-| **5** | IA faz sozinha com qualidade | Autonomia 4.5+, sucesso >85%, padrao "directive" | Classificar texto, traduzir, gerar codigo boilerplate |
-| **4** | IA faz bem com supervisao leve | Autonomia 3.5-4.4, sucesso 70-85% | Redigir emails, analisar dados estruturados, criar apresentacoes |
-| **3** | IA ajuda parcialmente | Autonomia 2.5-3.4, ou tarefa com componentes mistas | Preparar propostas (IA faz rascunho, humano personaliza) |
-| **2** | IA ajuda pouco | Autonomia <2.5, ou tarefa muito contextual | Negociacao, gestao de conflito, decisoes politicas |
-| **1** | IA ineficaz | Sem dados, tarefa fisica ou profundamente relacional | Trabalho manual, empatia profunda, lideranca presencial |
+**NUNCA force um fuzzy match ruim no AEI.** Se nao houver match claro, confie no score baseado no METR Horizon.
 
 ### Vieses conhecidos (calibrar manualmente)
 
-- **Vies tech**: Programacao tem scores inflados (devs sao heavy users)
+- **Vies de task type**: METR testa tarefas de software/research — atividades de escrita, analise e criacao podem ter performance ligeiramente diferente
 - **Vies anglofono**: Tarefas em contexto BR podem ter performance diferente
-- **Ausencia ≠ incapacidade**: Se uma tarefa nao aparece no dataset, pode ser porque o publico-alvo nao usa IA (ainda), nao porque a IA nao consegue
-- **Temporal**: Dados de Nov 2025 — modelos evoluem rapido. Tarefas com score 2-3 podem subir em 6 meses
+- **Scaffold matters**: Performance depende de como a IA e orquestrada (prompt, ferramentas, contexto). Scores METR usam scaffolds otimizados
+- **Temporal**: Horizonte dobra a cada ~4 meses. Tarefas com score 2-3 podem subir em 6 meses. Data de referencia dos dados: Marco 2026
 
 ---
 
@@ -216,6 +259,6 @@ Sempre classificar cada score:
 
 | Nivel | Criterios | Linguagem |
 |-------|-----------|-----------|
-| **Alta** | Match direto nos dados AEI + volume claro do aluno + ferramenta identificada | "Baseado em dados reais de 458K conversas com IA..." |
-| **Media** | Estimativa informada + volume aproximado + ferramenta generica | "Com base no estado atual da tecnologia, tarefas como essa..." |
-| **Baixa** | Sem dados, sem volume claro, contexto vago | "Esta e uma estimativa inicial — recomendo validar com um teste pratico" |
+| **Alta** | Duracao clara + dentro do p80 METR + validacao AEI + volume claro do aluno | "Baseado no METR Horizon, tarefas de ate Xh tem >80% de taxa de sucesso em modelos como..." |
+| **Media** | Duracao estimada + dentro do horizonte mas sem validacao AEI | "Com base no horizonte empirico do modelo, tarefas dessa duracao tendem a..." |
+| **Baixa** | Duracao incerta, ou tarefa no limite entre faixas, ou contexto vago | "Esta e uma estimativa inicial — recomendo validar com um teste pratico" |
