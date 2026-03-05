@@ -58,7 +58,7 @@ And this context:
 }
 ```
 
-Skip the column mapping confirmation and business context interview in demo mode — go straight to Phase 3 (Run Analysis). After presenting results, remind the user: "Essa foi uma run de demonstracao. Para analisar seus proprios dados, rode `/rfm-analysis` novamente anexando seu arquivo CSV ou XLSX."
+Skip the column mapping confirmation and business context interview in demo mode — go straight to Phase 3 (Run Analysis). **Important: In demo mode, still render the FULL inline report (all 8 steps) exactly as you would for real data.** The demo must showcase the complete output experience. After the full report, add a reminder: "Essa foi uma run de demonstracao. Para analisar seus proprios dados, rode `/rfm-analysis` novamente anexando seu arquivo CSV ou XLSX."
 
 ### Phase 1: Data Intake
 
@@ -117,6 +117,8 @@ python3 "$SKILL_DIR/scripts/rfm_analysis.py" \
 The script outputs to stdout a JSON summary with segment and cluster data. Read this to present insights.
 
 ### Phase 4: Present Results (Native Rendering)
+
+**CRITICAL: The full inline report IS the deliverable.** Always render the complete report directly in chat — all 8 steps below — regardless of whether this is a demo run or a real analysis. The user should never need to open a separate file to see results. File cards at the end are supplementary exports, not the primary output.
 
 After the script runs, present ALL results directly in chat using G4 OS native components. **Do NOT use html-preview.** Read the script's stdout JSON and the output files to build the rendering.
 
