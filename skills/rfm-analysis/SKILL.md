@@ -16,7 +16,13 @@ Always use absolute paths when running commands.
 
 ## Overview
 
-This skill takes transactional data (CSV or XLSX), computes RFM (Recency, Frequency, Monetary) scores, segments customers into actionable groups, runs K-Means clustering, and presents results using **native G4 OS rendering** (jsonrender dashboards, datatables) directly in chat. **Do NOT use mermaid pie charts — they are not supported.**
+This skill takes transactional data (CSV or XLSX), computes RFM (Recency, Frequency, Monetary) scores, segments customers into actionable groups, runs K-Means clustering, and presents results using **jsonrender** and **datatable** components directly in the chat message.
+
+**RENDERING RULES — read before presenting results:**
+- **USE**: `jsonrender` (Cards, Metrics, Progress, Tabs, Checklists) and `datatable` for ALL visual output
+- **DO NOT USE**: `html-preview`, `web-app-preview`, `pdf-preview`, mermaid pie charts, or any external file/webapp as the primary output
+- The complete report MUST be rendered inline as chat content using jsonrender + datatable blocks
+- File cards (filecard) are allowed ONLY as supplementary exports at the very end, after the full inline report
 
 ## Conversation Flow
 
@@ -118,9 +124,14 @@ The script outputs to stdout a JSON summary with segment and cluster data. Read 
 
 ### Phase 4: Present Results (Native Rendering)
 
-**CRITICAL: The full inline report IS the deliverable.** Always render the complete report directly in chat — all 8 steps below — regardless of whether this is a demo run or a real analysis. The user should never need to open a separate file to see results. File cards at the end are supplementary exports, not the primary output.
+**CRITICAL: The full inline report IS the deliverable.** Always render the complete report directly in chat using `jsonrender` and `datatable` blocks — all 8 steps below — regardless of whether this is a demo run or a real analysis. The user should never need to open a separate file to see results.
 
-After the script runs, present ALL results directly in chat using G4 OS native components. **Do NOT use html-preview.** Read the script's stdout JSON and the output files to build the rendering.
+**Rendering stack (strictly enforced):**
+- KPIs, health bars, revenue concentration, action checklists → `jsonrender`
+- Segment table, cluster table → `datatable`
+- Insights → plain markdown
+- Exported files → `filecard` (supplementary only, after full report)
+- **NEVER** use: `html-preview`, `web-app-preview`, `pdf-preview`, standalone HTML files, or mermaid diagrams as output
 
 #### Step 1: KPI Dashboard (jsonrender)
 
