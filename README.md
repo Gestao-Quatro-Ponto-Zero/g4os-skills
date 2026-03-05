@@ -14,6 +14,7 @@ Skills sao ferramentas de proposito unico. Workflows sao processos multi-fase co
 |-------|-----------|----------|
 | **[Humanize Writing](skills/humanize/)** | Reescreve conteudo para soar naturalmente humano. Remove 18 padroes de escrita AI segundo a Wikipedia. *Para textos em ingles.* | `skills/humanize` |
 | **[Video Combiner](skills/video-combiner/)** | Combina segmentos de video Hook + Body + CTA em variacoes de ads com legendas automaticas em multiplos aspect ratios | `skills/video-combiner` |
+| **[Conciliacao Financeira](skills/conciliacao/)** | Conciliacao automatica de extratos bancarios com gateways, ERPs ou outras fontes — motor multi-pass em Python, parsers para Stripe/Itau/Nubank/OFX/NFe | `skills/conciliacao` |
 
 ### Workflows
 
@@ -43,6 +44,11 @@ Instale o skill "video-combiner" de https://github.com/Gestao-Quatro-Ponto-Zero/
 **Onde Usar IA:**
 ```
 Instale o workflow "onde-usar-ia" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie workflows/onde-usar-ia/ para o diretorio de workflows do meu G4 OS, depois execute data/download.sh para baixar os datasets de scoring. Confirme que esta funcionando.
+```
+
+**Conciliacao Financeira:**
+```
+Instale o skill "conciliacao" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie skills/conciliacao/ para o diretorio de skills do meu G4 OS, confirme que pandas esta instalado (pip install pandas), e teste que esta funcionando.
 ```
 
 **Cortes Virais:**
