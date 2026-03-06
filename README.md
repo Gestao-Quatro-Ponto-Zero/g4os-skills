@@ -65,7 +65,7 @@ Instale o workflow "cortes-virais" de https://github.com/Gestao-Quatro-Ponto-Zer
 
 **Ecossistema de Vendas:**
 ```
-Instale o workflow "ecossistema-vendas" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie workflows/ecossistema-vendas/ para o diretorio de workflows do meu G4 OS, e confirme que esta funcionando.
+Instale o workflow "ecossistema-vendas" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie workflows/ecossistema-vendas/ para o diretorio de workflows do meu G4 OS, e confirme que esta funcionando. Depois me apresente o que o workflow faz e como usar.
 ```
 
 O G4 OS cuida do git clone, copia para o caminho correto do workspace, e verifica a instalacao.

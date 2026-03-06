@@ -37,21 +37,32 @@ Um comando (`/ecossistema-vendas`) que diagnostica e guia o usuário por 3 ferra
 
 ## Instalação
 
-### Opção 1: Copiar manualmente
+Cole este prompt no G4 OS:
+
+```
+Instale o workflow "ecossistema-vendas" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie workflows/ecossistema-vendas/ para o diretório de workflows do meu G4 OS, e confirme que está funcionando. Depois me apresente o que o workflow faz e como usar.
+```
+
+O G4 OS faz o resto: clona, copia para o path correto, e valida.
+
+### Alternativa manual
 
 ```bash
-# Clone o repo
-git clone https://github.com/g4educacao/g4os-skills.git
-
-# Copie o workflow para seu G4 OS
+git clone https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills.git
 cp -r g4os-skills/workflows/ecossistema-vendas ~/.g4os/workspaces/my-workspace/workflows/
 ```
 
-### Opção 2: Script de instalação
+## Templates (planilhas)
 
-```bash
-curl -s https://raw.githubusercontent.com/g4educacao/g4os-skills/main/install.sh | bash
-```
+Templates XLSX prontos para preencher e importar no workflow. Cada um inclui exemplos em cinza, aba de contexto, e guia de preenchimento.
+
+| Template | Para que serve | Download |
+|----------|---------------|----------|
+| `canal_matrix_template.xlsx` | Preencher seus canais com score de validação e potencial | [Baixar](templates/canal_matrix_template.xlsx) |
+| `budget_70_20_10_template.xlsx` | Classificar canais em Escala/Aceleração/Descoberta com budget | [Baixar](templates/budget_70_20_10_template.xlsx) |
+| `comp_plan_template.xlsx` | Montar comp plan com cargos, OTE, aceleradores e contests | [Baixar](templates/comp_plan_template.xlsx) |
+
+**Como usar:** Preencha a planilha → abra o G4 OS → digite `/ecossistema-vendas` → anexe o arquivo. O workflow importa automaticamente.
 
 ## Estrutura
 
@@ -63,6 +74,10 @@ ecossistema-vendas/
 │   ├── framework-reference.md    ← Resumo dos 80 slides da aula
 │   ├── channel-scoring-guide.md  ← Como pontuar canais (benchmarks por segmento)
 │   └── comp-plan-guide.md        ← Aceleradores, OTE, contests em detalhe
+├── templates/               ← Planilhas prontas para importar
+│   ├── canal_matrix_template.xlsx
+│   ├── budget_70_20_10_template.xlsx
+│   └── comp_plan_template.xlsx
 ├── scripts/                 ← Scripts Python para cálculos e visualizações
 │   ├── channel_matrix.py         ← Gera matriz 2x2 interativa (HTML)
 │   ├── budget_allocator.py       ← Analisa alocação e gera report (HTML)
