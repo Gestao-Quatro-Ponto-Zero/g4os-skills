@@ -32,49 +32,15 @@ Skills sao ferramentas de proposito unico. Workflows sao processos multi-fase co
 
 ### Opcao A: Colar no G4 OS (recomendado)
 
-Copie e cole um desses prompts em uma conversa do G4 OS:
+Cada skill e workflow tem um `README.md` com o comando de instalacao pronto para copiar e colar. Clique no nome no [catalogo acima](#catalogo) para ir ao README.
 
-**Humanize Writing:**
-```
-Instale o skill "humanize" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie skills/humanize/ para o diretorio de skills do meu G4 OS, e confirme que esta funcionando.
-```
+O formato geral e:
 
-**Video Combiner:**
 ```
-Instale o skill "video-combiner" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie skills/video-combiner/ para o diretorio de skills do meu G4 OS, instale as dependencias (brew install ffmpeg whisper-cpp), e confirme que esta funcionando.
+Instale o skill/workflow "<nome>" do repositorio g4os-skills: https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills/tree/main/<caminho>
 ```
 
-**Onde Usar IA:**
-```
-Instale o workflow "onde-usar-ia" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie workflows/onde-usar-ia/ para o diretorio de workflows do meu G4 OS, depois execute data/download.sh para baixar os datasets de scoring. Confirme que esta funcionando.
-```
-
-**Conciliacao Financeira:**
-```
-Instale o skill "conciliacao" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie skills/conciliacao/ para o diretorio de skills do meu G4 OS, confirme que pandas esta instalado (pip install pandas), e teste que esta funcionando.
-```
-
-**RFM Analysis:**
-```
-Instale o skill "rfm-analysis" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie skills/rfm-analysis/ para o diretorio de skills do meu G4 OS, confirme que pandas e scikit-learn estao instalados, e teste que esta funcionando.
-```
-
-**Cortes Virais:**
-```
-Instale o workflow "cortes-virais" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie workflows/cortes-virais/ para o diretorio de workflows do meu G4 OS, instale as dependencias (brew install yt-dlp ffmpeg whisper-cpp + download do modelo ggml-medium.bin), e confirme que esta funcionando.
-```
-
-**Ecossistema de Vendas:**
-```
-Instale o workflow "ecossistema-vendas" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie workflows/ecossistema-vendas/ para o diretorio de workflows do meu G4 OS, e confirme que esta funcionando. Depois me apresente o que o workflow faz e como usar.
-```
-
-**Mentalidade de Growth:**
-```
-Instale o workflow "Mentalidade de Growth" do repositório g4os-skills: https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills/tree/main/workflows/mentalidade-growth
-```
-
-O G4 OS cuida do git clone, copia para o caminho correto do workspace, e verifica a instalacao.
+O G4 OS cuida do git clone, copia para o caminho correto do workspace, instala dependencias, e verifica a instalacao.
 
 ### Opcao B: Comando no terminal
 
