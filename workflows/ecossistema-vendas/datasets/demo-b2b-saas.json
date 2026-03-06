@@ -68,6 +68,11 @@
           {"min_pct": 100, "max_pct": 119, "multiplier": 1.0},
           {"min_pct": 120, "max_pct": 999, "multiplier": 1.5}
         ],
+        "modifiers": {
+          "payment": {"pix": 1.15, "cartao_1_3": 1.0, "boleto_7_12": 0.90, "anual_upfront": 1.20},
+          "discount": {"full_price": 1.10, "1_10pct": 1.0, "11_20pct": 0.85, "21_plus": 0.70},
+          "grace_period": {"none": 1.0, "30_days": 0.95, "60_plus": 0.85}
+        },
         "contests": [
           {"name": "Deal do Mês", "metric": "Maior deal fechado", "prize": "R$2.000 bônus", "duration": "mensal"},
           {"name": "Meta Trimestral", "metric": "Bater meta 3 meses consecutivos", "prize": "PLR trimestral de 1x salário", "duration": "trimestral"}
@@ -95,6 +100,10 @@
           {"min_pct": 100, "max_pct": 119, "multiplier": 1.0},
           {"min_pct": 120, "max_pct": 999, "multiplier": 1.5}
         ],
+        "modifiers": {
+          "payment": {"pix": 1.15, "cartao_1_3": 1.0, "boleto_7_12": 0.90, "anual_upfront": 1.20},
+          "discount": {"full_price": 1.10, "1_10pct": 1.0, "11_20pct": 0.85}
+        },
         "contests": [
           {"name": "Churn Zero", "metric": "Zero churn no mês", "prize": "R$1.500 bônus", "duration": "mensal"},
           {"name": "Expansão Recorde", "metric": "Maior upsell do trimestre", "prize": "Viagem incentivo", "duration": "trimestral"}

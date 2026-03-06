@@ -20,7 +20,38 @@ def get_multiplier(attainment_pct, accelerators):
     return 0
 
 
-def simulate_plan(plan, attainment_pct):
+def compute_deal_modifier(modifiers, scenario="neutral"):
+    """Compute combined deal modifier for a given scenario.
+
+    Scenarios: 'best' (all bonuses), 'neutral' (no modifiers), 'worst' (all deflators).
+    Returns the combined multiplier and a breakdown dict.
+    """
+    if not modifiers:
+        return 1.0, {}
+
+    breakdown = {}
+    combined = 1.0
+
+    for mod_type, rules in modifiers.items():
+        if scenario == "best":
+            # Pick the highest modifier
+            val = max(rules.values())
+            key = [k for k, v in rules.items() if v == val][0]
+        elif scenario == "worst":
+            # Pick the lowest modifier
+            val = min(rules.values())
+            key = [k for k, v in rules.items() if v == val][0]
+        else:
+            # Neutral — pick the one closest to 1.0
+            val = min(rules.values(), key=lambda v: abs(v - 1.0))
+            key = [k for k, v in rules.items() if v == val][0]
+        breakdown[mod_type] = {"condition": key, "multiplier": val}
+        combined *= val
+
+    return round(combined, 4), breakdown
+
+
+def simulate_plan(plan, attainment_pct, deal_modifier=1.0):
     """Simulate compensation for a given attainment level."""
     base = plan["base_salary"]
     target_value = plan["target_value"]
@@ -45,13 +76,14 @@ def simulate_plan(plan, attainment_pct):
         ote_variable = plan["ote"] - base
         base_commission = ote_variable * attainment_pct / 100
 
-    variable = base_commission * multiplier
+    variable = base_commission * multiplier * deal_modifier
     total = base + variable
 
     return {
         "attainment_pct": attainment_pct,
         "units_delivered": round(units_delivered, 1),
         "multiplier": multiplier,
+        "deal_modifier": deal_modifier,
         "base_salary": base,
         "variable": round(variable),
         "total_comp": round(base + variable),
@@ -79,6 +111,20 @@ def analyze(data):
         ote_sim = simulate_plan(plan, 100)
         ote_match = abs(ote_sim["total_comp"] - plan["ote"]) < plan["ote"] * 0.05
 
+        # Deal modifier scenarios (if modifiers defined)
+        modifiers = plan.get("modifiers", {})
+        modifier_scenarios = {}
+        if modifiers:
+            for scenario_name in ["best", "neutral", "worst"]:
+                mod_val, mod_breakdown = compute_deal_modifier(modifiers, scenario_name)
+                sim_100 = simulate_plan(plan, 100, deal_modifier=mod_val)
+                modifier_scenarios[scenario_name] = {
+                    "deal_modifier": mod_val,
+                    "breakdown": mod_breakdown,
+                    "variable_at_100": sim_100["variable"],
+                    "total_at_100": sim_100["total_comp"],
+                }
+
         results.append({
             "role": plan["role"],
             "headcount": plan["headcount"],
@@ -90,6 +136,8 @@ def analyze(data):
             "target_unit": plan.get("target_unit", ""),
             "commission_mechanism": f"R${plan['commission_per_unit']}/unidade" if plan.get("commission_per_unit") else f"{plan.get('commission_pct', 0)}% da receita",
             "accelerators": plan.get("accelerators", []),
+            "modifiers": modifiers,
+            "modifier_scenarios": modifier_scenarios,
             "contests": plan.get("contests", []),
             "split_metrics": plan.get("split_metrics", []),
             "simulations": simulations,
@@ -180,6 +228,14 @@ input[type="range"]::-webkit-slider-thumb {{ -webkit-appearance: none; width: 20
 .table td {{ padding: 8px; font-size: 14px; border-bottom: 1px solid rgba(51,65,85,0.5); }}
 .table tr.highlight {{ background: rgba(59,130,246,0.1); }}
 .footer {{ text-align: center; margin-top: 40px; font-size: 12px; color: #475569; }}
+.mod-section {{ margin-top: 16px; padding: 16px; background: #0f172a; border-radius: 8px; }}
+.mod-row {{ display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }}
+.mod-row label {{ font-size: 13px; color: #94a3b8; min-width: 120px; }}
+.mod-row select {{ background: #1e293b; color: #e2e8f0; border: 1px solid #334155; border-radius: 6px; padding: 6px 10px; font-size: 13px; }}
+.mod-badge {{ display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-left: 8px; }}
+.mod-badge.bonus {{ background: rgba(34,197,94,0.15); color: #22c55e; }}
+.mod-badge.neutral {{ background: rgba(148,163,184,0.15); color: #94a3b8; }}
+.mod-badge.deflator {{ background: rgba(239,68,68,0.15); color: #ef4444; }}
 </style>
 </head>
 <body>
@@ -210,7 +266,8 @@ function getMultiplier(pct, accels) {{
   return 0;
 }}
 
-function simulate(plan, pct) {{
+function simulate(plan, pct, dealMod) {{
+  dealMod = dealMod || 1.0;
   const base = plan.base_salary;
   const target = plan.target_value;
   const units = target * pct / 100;
@@ -225,8 +282,18 @@ function simulate(plan, pct) {{
     baseComm = units * commPct / 100;
   }}
 
-  const variable = baseComm * mult;
-  return {{ base, variable: Math.round(variable), total: Math.round(base + variable), mult, units: Math.round(units * 10) / 10 }};
+  const variable = baseComm * mult * dealMod;
+  return {{ base, variable: Math.round(variable), total: Math.round(base + variable), mult, dealMod, units: Math.round(units * 10) / 10 }};
+}}
+
+function getDealModifier(plan) {{
+  if (!plan.modifiers || Object.keys(plan.modifiers).length === 0) return 1.0;
+  let combined = 1.0;
+  for (const [modType, rules] of Object.entries(plan.modifiers)) {{
+    const sel = document.getElementById('mod_' + activePlan + '_' + modType);
+    if (sel) combined *= parseFloat(sel.value);
+  }}
+  return combined;
 }}
 
 function renderPlan(idx) {{
@@ -274,13 +341,37 @@ function renderPlan(idx) {{
       <div class="slider-value" id="sliderVal">100%</div>
       <input type="range" id="attSlider" min="0" max="200" value="100" step="5">
       <div class="slider-label"><span>0%</span><span>100%</span><span>200%</span></div>
-    </div>
+    </div>`;
+
+  // Modifier dropdowns if plan has modifiers
+  const modLabels = {{ payment: 'Modal Pagamento', discount: 'Desconto', grace_period: 'Carencia' }};
+  const condLabels = {{
+    pix: 'PIX / À vista', cartao_1_3: 'Cartão 1-3x', cartao_4_6: 'Cartão 4-6x',
+    boleto_7_12: 'Boleto 7-12x', anual_upfront: 'Anual upfront', recorrencia: 'Recorrência',
+    full_price: 'Preço cheio (0%)', '1_10pct': 'Desconto 1-10%', '11_20pct': 'Desconto 11-20%',
+    '21_plus': 'Desconto 21%+', none: 'Sem carência', '30_days': '30 dias', '60_plus': '60+ dias'
+  }};
+  if (plan.modifiers && Object.keys(plan.modifiers).length > 0) {{
+    html += `<div class="mod-section"><h3 style="margin-bottom:12px;font-size:14px;color:#94a3b8">Modificadores de Deal</h3>`;
+    for (const [modType, rules] of Object.entries(plan.modifiers)) {{
+      html += `<div class="mod-row"><label>${{modLabels[modType] || modType}}</label><select id="mod_${{idx}}_${{modType}}" onchange="updateSlider()">`;
+      for (const [cond, val] of Object.entries(rules)) {{
+        const label = condLabels[cond] || cond;
+        const selected = Math.abs(val - 1.0) < 0.001 ? ' selected' : '';
+        html += `<option value="${{val}}"${{selected}}>${{label}} (${{val > 1 ? '+' : ''}}${{Math.round((val-1)*100)}}%)</option>`;
+      }}
+      html += `</select></div>`;
+    }}
+    html += `<div style="margin-top:8px;font-size:12px;color:#64748b">Modificador combinado: <span id="modCombined" style="color:#e2e8f0;font-weight:600">1.0x</span></div></div>`;
+  }}
+
+  html += `
     <div class="result-grid">
       <div class="result-box"><div class="rlabel">Base</div><div class="rvalue" id="rBase">${{fmtBRL(plan.base_salary)}}</div></div>
       <div class="result-box"><div class="rlabel">Variavel</div><div class="rvalue" id="rVar" style="color:#22c55e">—</div></div>
       <div class="result-box"><div class="rlabel">Total</div><div class="rvalue" id="rTotal" style="color:#3b82f6">—</div></div>
     </div>
-  </div>
+  </div>`;
 
   <div class="card">
     <h3>Tabela de Cenarios</h3>
@@ -316,14 +407,20 @@ function renderPlan(idx) {{
 
   // Attach slider listener
   const slider = document.getElementById('attSlider');
-  const updateSlider = () => {{
+  window.updateSlider = () => {{
     const pct = parseInt(slider.value);
+    const dealMod = getDealModifier(plan);
     document.getElementById('sliderVal').textContent = pct + '%';
     document.getElementById('sliderVal').style.color = pct < 71 ? '#ef4444' : pct < 100 ? '#eab308' : '#22c55e';
-    const sim = simulate(plan, pct);
+    const sim = simulate(plan, pct, dealMod);
     document.getElementById('rBase').textContent = fmtBRL(sim.base);
     document.getElementById('rVar').textContent = fmtBRL(sim.variable);
     document.getElementById('rTotal').textContent = fmtBRL(sim.total);
+    const modEl = document.getElementById('modCombined');
+    if (modEl) {{
+      modEl.textContent = dealMod.toFixed(2) + 'x';
+      modEl.style.color = dealMod > 1 ? '#22c55e' : dealMod < 1 ? '#ef4444' : '#e2e8f0';
+    }}
   }};
   slider.addEventListener('input', updateSlider);
   updateSlider();
@@ -395,6 +492,15 @@ def generate_doc(result, output_path):
         doc += "|-------------|----------|-------|------|----------|-------|\n"
         for sim in plan["simulations"]:
             doc += f"| {sim['attainment_pct']}% | {sim['units_delivered']} | {sim['multiplier']}x | {fmt(sim['base_salary'])} | {fmt(sim['variable'])} | {fmt(sim['total_comp'])} |\n"
+
+        if plan.get("modifier_scenarios") and plan["modifier_scenarios"]:
+            doc += "\n### Modificadores de Deal (impacto a 100% de meta)\n\n"
+            doc += "| Cenario | Modificador | Variavel | Total |\n"
+            doc += "|---------|-------------|----------|-------|\n"
+            labels = {"best": "Melhor caso", "neutral": "Neutro", "worst": "Pior caso"}
+            for sc_name, sc_data in plan["modifier_scenarios"].items():
+                sign = "+" if sc_data["deal_modifier"] > 1 else ""
+                doc += f"| {labels.get(sc_name, sc_name)} | {sc_data['deal_modifier']}x ({sign}{round((sc_data['deal_modifier']-1)*100)}%) | {fmt(sc_data['variable_at_100'])} | {fmt(sc_data['total_at_100'])} |\n"
 
         if plan.get("contests"):
             doc += "\n### Contests & Incentivos\n\n"

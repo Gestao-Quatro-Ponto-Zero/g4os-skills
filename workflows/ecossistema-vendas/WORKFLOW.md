@@ -256,6 +256,46 @@ python3 {workflow_dir}/scripts/budget_allocator.py \
 | 100-119% | 1.0x | Na meta — comissão cheia |
 | 120%+ | 1.5x | Super performance — acelerador |
 
+### Modificadores por Condição de Venda
+
+Além dos aceleradores por meta, cada deal pode ter **modificadores** que bonificam ou penalizam a comissão baseado na qualidade da venda. São multiplicadores sobre a comissão do deal individual.
+
+| Tipo | Condição | Modificador |
+|------|----------|-------------|
+| **Modal de Pagamento** | PIX / à vista | +15% |
+| | Cartão 1-3x | Neutro |
+| | Boleto 7-12x | -10% |
+| | Anual upfront | +20% |
+| **Carência** | Sem carência | Neutro |
+| | 30 dias | -5% |
+| | 60+ dias | -10% a -15% |
+| **Desconto** | Preço cheio (0%) | +10% |
+| | 1-10% | Neutro |
+| | 11-20% | -15% |
+| | 21%+ | -30% ou sem comissão |
+
+Modificadores são **multiplicativos** entre si. Exemplo: deal à vista (+15%) + sem desconto (+10%) = comissão × 1.15 × 1.10 = +26.5%.
+
+Para times < 10, usar versão simplificada com 4 regras (ver `knowledge/comp-plan-guide.md`).
+
+Ao coletar dados, perguntar: **"Vocês já diferenciam comissão por modal de pagamento, desconto, ou carência? Querem incluir isso?"**
+- Se sim: coletar as regras atuais e modelar
+- Se não mas tem interesse: sugerir a versão simplificada
+- Se não quer: pular — modificadores são opcionais
+
+### Pesquisa de Base Salarial
+
+**Quando usar:** Se o usuário não sabe qual salário base definir, ou quer validar se está competitivo.
+
+**Fluxo:**
+1. Perguntar: cargo, cidade, senioridade (Jr/Pl/Sr), tipo de empresa (startup/consolidada)
+2. Fazer **web search** por: `"salário [cargo] [cidade] 2026"` em fontes como Glassdoor, Robert Half, Catho
+3. Apresentar faixa de mercado em datatable
+4. Recomendar um valor considerando ajustes (startup, segmento premium, remoto, etc.)
+5. Usar o valor acordado como base para calcular o OTE
+
+**Benchmarks de referência** estão em `knowledge/comp-plan-guide.md` — usar como fallback se web search não retornar dados.
+
 ### Tipos de incentivo por prazo (Slide 70)
 
 | Prazo | Exemplos | Para quê |
@@ -279,11 +319,19 @@ python3 {workflow_dir}/scripts/budget_allocator.py \
 |-------|-------------|---------|
 | cargo | Sim | "SDR", "Closer", "Account Manager" |
 | headcount | Sim | 5 |
-| salario_base | Sim | R$3.000 |
+| salario_base | Sim (ou pedir pesquisa salarial) | R$3.000 |
 | ote | Sim | R$6.000 |
 | meta (valor + unidade) | Sim | 20 reuniões/mês |
 | mecanismo | Sim | R$150/reunião OU 10% da receita |
 | aceleradores | Não | Default do Alfredo se não customizar |
+
+**Modificadores de deal (opcional):**
+
+| Campo | Obrigatório | Exemplo |
+|-------|-------------|---------|
+| modifiers.payment | Não | {"pix": 1.15, "cartao_1_3": 1.0, "boleto_7_12": 0.90} |
+| modifiers.discount | Não | {"full_price": 1.10, "1_10pct": 1.0, "11_20pct": 0.85, "21_plus": 0.70} |
+| modifiers.grace_period | Não | {"none": 1.0, "30_days": 0.95, "60_plus": 0.85} |
 
 **Aceitar input em bloco:**
 > "Tenho 5 SDRs ganhando R$3K base, OTE R$6K, meta de 20 reuniões, R$150 por reunião qualificada"
@@ -304,19 +352,23 @@ python3 {workflow_dir}/scripts/comp_plan.py \
 
 2. **Plano por Cargo** (jsonrender Tabs) — Uma aba por cargo: métricas (base, OTE, variável, meta, mecanismo) + aceleradores como Progress bars visuais
 
-3. **Simulação de Cenários** (datatable) — Por cargo: atingimento de 50% a 150% com multiplicador, base, variável, total. Highlight na linha de 100%.
+3. **Modificadores de Deal** (datatable) — Se o usuário configurou modificadores: tabela mostrando cada condição, modificador, e impacto em R$ num deal exemplo. Se não configurou: pular.
 
-4. **Custo Total Empresa** (datatable) — Tabela consolidada: cargo, HC, folha base, custo se time a 80%, 100%, 120%. Linha de % da receita target.
+4. **Simulação de Cenários** (datatable) — Por cargo: atingimento de 50% a 150% com multiplicador, base, variável, total. Highlight na linha de 100%.
 
-5. **Contests & Incentivos** (jsonrender) — Checklist por prazo (curto/médio/longo)
+5. **Simulação com Modificadores** (datatable) — Se configurou: mostrar 3 cenários de deal (melhor caso, caso neutro, pior caso) com modificadores aplicados. Ex: "Deal R$100K: à vista + preço cheio = R$12.650 vs boleto 12x + 20% desconto = R$6.120"
 
-6. **Alertas** (jsonrender) — Warnings se custo > teto, se floor muito agressivo para ramp-up, tips do Alfredo
+6. **Custo Total Empresa** (datatable) — Tabela consolidada: cargo, HC, folha base, custo se time a 80%, 100%, 120%. Linha de % da receita target.
 
-7. **Calculadora Interativa** (web-app-preview) — HTML com slider de atingimento → remuneração em tempo real
+7. **Contests & Incentivos** (jsonrender) — Checklist por prazo (curto/médio/longo)
 
-8. **Documento Final** (filecard) — `comp_plan_doc.md` pronto para compartilhar com o time
+8. **Alertas** (jsonrender) — Warnings se custo > teto, se floor muito agressivo para ramp-up, se spread de modificadores > 2x, tips do Alfredo
 
-9. **File Cards** — `comp_plan_report.html` + `comp_plan_analysis.json`
+9. **Calculadora Interativa** (web-app-preview) — HTML com slider de atingimento + toggles de modificadores → remuneração em tempo real
+
+10. **Documento Final** (filecard) — `comp_plan_doc.md` pronto para compartilhar com o time
+
+11. **File Cards** — `comp_plan_report.html` + `comp_plan_analysis.json`
 
 ---
 
