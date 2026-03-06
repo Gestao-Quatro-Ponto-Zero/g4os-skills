@@ -24,6 +24,7 @@ Skills sao ferramentas de proposito unico. Workflows sao processos multi-fase co
 | **[Onde Usar IA](workflows/onde-usar-ia/)** | Diagnostico interativo de IA generativa — matriz 2x2, business case quantificado, demo ao vivo | `workflows/onde-usar-ia` |
 | **[Cortes Virais](workflows/cortes-virais/)** | Transforma entrevistas/podcasts do YouTube em 5-7 cortes verticais (9:16) de 60-90s com hook teaser e legendas dinamicas | `workflows/cortes-virais` |
 | **[Ecossistema de Vendas](workflows/ecossistema-vendas/)** | 3 ferramentas praticas para construir seu ecossistema de vendas — priorizacao de canais (matriz 2x2), alocacao de budget (70/20/10), e comp plan com aceleradores. Framework Alfredo Soares. | `workflows/ecossistema-vendas` |
+| **[Mentalidade de Growth](workflows/mentalidade-growth/)** | 3 ferramentas para destravar crescimento — escada de valor (LTV), diagnostico de maturidade (radar 4 areas), e analise RFV (11 segmentos). Framework Bruno Nardon. | `workflows/mentalidade-growth` |
 
 ---
 
@@ -66,6 +67,11 @@ Instale o workflow "cortes-virais" de https://github.com/Gestao-Quatro-Ponto-Zer
 **Ecossistema de Vendas:**
 ```
 Instale o workflow "ecossistema-vendas" de https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills — clone o repo, copie workflows/ecossistema-vendas/ para o diretorio de workflows do meu G4 OS, e confirme que esta funcionando. Depois me apresente o que o workflow faz e como usar.
+```
+
+**Mentalidade de Growth:**
+```
+Instale o workflow "Mentalidade de Growth" do repositório g4os-skills: https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills/tree/main/workflows/mentalidade-growth
 ```
 
 O G4 OS cuida do git clone, copia para o caminho correto do workspace, e verifica a instalacao.
