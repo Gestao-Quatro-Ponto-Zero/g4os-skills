@@ -1,0 +1,22 @@
+{
+  "type": "all",
+  "company_name": "ModaViva (E-commerce Demo)",
+  "num_employees": 150,
+  "monthly_revenue": 2000000,
+  "sector": "E-commerce Moda",
+  "main_challenge": "Ticket médio estagnado, clientes compram só na promoção",
+  "maturity": {
+    "marketing": {"score": 8, "notes": "Mídia paga otimizada, influenciadores ativos, SEO forte, base de 200K emails"},
+    "comercial": {"score": 6, "notes": "Time de marketplace e D2C separados, conversão boa no site mas depende de promoção para volume"},
+    "ti": {"score": 5, "notes": "Plataforma de e-commerce ok, ERP integrado parcialmente, BI com dados atrasados, sem personalização"},
+    "operacoes": {"score": 7, "notes": "Logística terceirizada eficiente, fulfillment D+2, trocas/devoluções com processo claro, NPS 62"}
+  },
+  "products": [
+    {"name": "Acessórios (bijuteria, cintos, lenços)", "price": 79, "type": "entrada", "margin_pct": 70, "active_clients": 8500, "conversion_from_previous": null, "recurring": false},
+    {"name": "Basics (camisetas, regatas)", "price": 149, "type": "entrada", "margin_pct": 65, "active_clients": 12000, "conversion_from_previous": null, "recurring": false},
+    {"name": "Linha Casual (vestidos, calças, blusas)", "price": 349, "type": "core", "margin_pct": 55, "active_clients": 6800, "conversion_from_previous": 32, "recurring": false},
+    {"name": "Linha Premium (tecidos nobres, design autoral)", "price": 699, "type": "premium", "margin_pct": 60, "active_clients": 2200, "conversion_from_previous": 18, "recurring": false},
+    {"name": "Clube ModaViva (assinatura mensal curadoria)", "price": 299, "type": "core", "margin_pct": 50, "active_clients": 450, "conversion_from_previous": 5, "recurring": true},
+    {"name": "Coleção Exclusiva (edição limitada, assinada)", "price": 2500, "type": "super-premium", "margin_pct": 72, "active_clients": 120, "conversion_from_previous": 5, "recurring": false}
+  ]
+}

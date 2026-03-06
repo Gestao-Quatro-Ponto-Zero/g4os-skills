@@ -1,0 +1,20 @@
+{
+  "type": "all",
+  "company_name": "CloudMetrics (B2B SaaS Demo)",
+  "num_employees": 80,
+  "monthly_revenue": 600000,
+  "sector": "SaaS B2B",
+  "main_challenge": "Crescemos rápido mas não sei onde focar agora",
+  "maturity": {
+    "marketing": {"score": 7, "notes": "Multi-canal com mídia paga previsível, MQL estável"},
+    "comercial": {"score": 5, "notes": "Time de 8, processo existe mas depende de 2 closers seniores"},
+    "ti": {"score": 8, "notes": "Stack moderna, dados em Databricks, automações rodando"},
+    "operacoes": {"score": 4, "notes": "Onboarding manual, CS reativo, churn preocupante"}
+  },
+  "products": [
+    {"name": "Plano Starter", "price": 297, "type": "entrada", "margin_pct": 90, "active_clients": 1200, "conversion_from_previous": null, "recurring": true},
+    {"name": "Plano Professional", "price": 997, "type": "core", "margin_pct": 85, "active_clients": 450, "conversion_from_previous": 38, "recurring": true},
+    {"name": "Plano Enterprise", "price": 4997, "type": "premium", "margin_pct": 80, "active_clients": 60, "conversion_from_previous": 13, "recurring": true},
+    {"name": "Consultoria de Implantação", "price": 25000, "type": "super-premium", "margin_pct": 50, "active_clients": 8, "conversion_from_previous": 13, "recurring": false}
+  ]
+}

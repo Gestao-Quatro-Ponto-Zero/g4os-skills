@@ -1,0 +1,21 @@
+{
+  "type": "all",
+  "company_name": "Academia de Líderes (Serviços/Educação Demo)",
+  "num_employees": 25,
+  "monthly_revenue": 350000,
+  "sector": "Educação Executiva / Serviços",
+  "main_challenge": "Dependo de eventos para vender, entre eventos receita cai",
+  "maturity": {
+    "marketing": {"score": 4, "notes": "Instagram forte do fundador (80K seguidores) mas sem funil estruturado, sem mídia paga, leads vêm de indicação e eventos"},
+    "comercial": {"score": 6, "notes": "Time de 3 vendedores competentes, processo no RD Station, boa conversão quando tem lead quente mas volume irregular"},
+    "ti": {"score": 2, "notes": "Planilhas para controle financeiro, Hotmart para cursos, WhatsApp para atendimento, zero integração entre sistemas"},
+    "operacoes": {"score": 5, "notes": "Eventos presenciais bem executados (NPS 78), cursos online com suporte básico, sem CS estruturado, entrega depende do fundador"}
+  },
+  "products": [
+    {"name": "Curso Online Liderança Essencial (gravado)", "price": 497, "type": "entrada", "margin_pct": 92, "active_clients": 1800, "conversion_from_previous": null, "recurring": false},
+    {"name": "Workshop Presencial (1 dia)", "price": 1997, "type": "core", "margin_pct": 45, "active_clients": 600, "conversion_from_previous": 22, "recurring": false},
+    {"name": "Programa de Desenvolvimento (3 meses, cohort)", "price": 8500, "type": "core", "margin_pct": 55, "active_clients": 120, "conversion_from_previous": 15, "recurring": false},
+    {"name": "Treinamento In-Company (customizado)", "price": 25000, "type": "premium", "margin_pct": 50, "active_clients": 18, "conversion_from_previous": 8, "recurring": false},
+    {"name": "Mentoria Exclusiva com Fundador (6 meses)", "price": 50000, "type": "super-premium", "margin_pct": 80, "active_clients": 4, "conversion_from_previous": 22, "recurring": false}
+  ]
+}
