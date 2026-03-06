@@ -1,0 +1,103 @@
+{
+  "company_name": "EduTech Academy (Demo)",
+  "industry": "Serviços / Educação Executiva",
+  "monthly_budget": 300000,
+  "currency": "BRL",
+  "channels": {
+    "data": [
+      {"name": "Meta Ads", "validation": 8, "potential": 8, "category": "escala", "budget": 90000, "roi_confirmed": true, "ltv_cac": 5.1, "cycle_days": 21, "notes": "Principal canal de captação, lançamentos e evergreen"},
+      {"name": "Google Ads (Search)", "validation": 8, "potential": 7, "category": "escala", "budget": 60000, "roi_confirmed": true, "ltv_cac": 4.5, "cycle_days": 14, "notes": "Alta intenção, bom para produtos de entrada"},
+      {"name": "Indicações / Afiliados", "validation": 9, "potential": 7, "category": "escala", "budget": 15000, "roi_confirmed": true, "ltv_cac": 11.0, "cycle_days": 10, "notes": "Programa com 200 afiliados ativos, melhor ROI da operação"},
+      {"name": "Eventos / Palestras", "validation": 7, "potential": 6, "category": "escala", "budget": 40000, "roi_confirmed": true, "ltv_cac": 6.8, "cycle_days": 7, "notes": "Eventos proprietários + palestras em congressos, bom para ticket alto"},
+      {"name": "Social Media Orgânico", "validation": 6, "potential": 6, "category": "escala", "budget": 20000, "roi_confirmed": true, "ltv_cac": 8.5, "cycle_days": 30, "notes": "Instagram 150K, LinkedIn 50K, conteúdo diário com time de 3"},
+      {"name": "YouTube", "validation": 4, "potential": 8, "category": "aceleracao", "budget": 25000, "roi_confirmed": false, "ltv_cac": null, "cycle_days": null, "notes": "Canal com 20K inscritos, investindo em produção há 4 meses"},
+      {"name": "Podcast", "validation": 5, "potential": 6, "category": "aceleracao", "budget": 15000, "roi_confirmed": false, "ltv_cac": null, "cycle_days": null, "notes": "30 episódios, 5K downloads/episódio, atribuição difícil"},
+      {"name": "Parcerias B2B", "validation": 3, "potential": 7, "category": "aceleracao", "budget": 20000, "roi_confirmed": false, "ltv_cac": null, "cycle_days": 45, "notes": "3 parcerias ativas com empresas de consultoria, potencial alto"},
+      {"name": "WhatsApp / CRM", "validation": 6, "potential": 5, "category": "escala", "budget": 10000, "roi_confirmed": true, "ltv_cac": 9.0, "cycle_days": 7, "notes": "Automações de nutrição + time de 2 SDRs via WhatsApp"},
+      {"name": "Webinars", "validation": 4, "potential": 5, "category": "descoberta", "budget": 5000, "roi_confirmed": false, "ltv_cac": null, "cycle_days": 14, "notes": "Testou 3 webinars, conversão de 3-5% dos inscritos"}
+    ],
+    "pegadinhas_didaticas": [
+      "Indicações/Afiliados com LTV:CAC 11x recebem apenas 5% do budget — maior oportunidade de realocação",
+      "YouTube tem potencial 8 mas validação 4 — aposta que precisa de paciência (compounding)",
+      "Parcerias B2B podem desbloquear ticket enterprise mas estão em estágio inicial (validação 3)",
+      "Eventos consomem 13% do budget com ROI bom — questionar se 2 eventos/tri é o ótimo ou se deve escalar"
+    ]
+  },
+  "comp_plan": {
+    "revenue_target": 1500000,
+    "max_commission_pct": 10,
+    "plans": [
+      {
+        "role": "SDR (Inside Sales)",
+        "headcount": 4,
+        "base_salary": 2800,
+        "ote": 5500,
+        "variable_pct": 49,
+        "target_metric": "Reuniões Qualificadas",
+        "target_value": 25,
+        "target_unit": "reuniões/mês",
+        "commission_per_unit": 108,
+        "accelerators": [
+          {"min_pct": 0, "max_pct": 70, "multiplier": 0},
+          {"min_pct": 71, "max_pct": 85, "multiplier": 0.5},
+          {"min_pct": 86, "max_pct": 99, "multiplier": 0.7},
+          {"min_pct": 100, "max_pct": 119, "multiplier": 1.0},
+          {"min_pct": 120, "max_pct": 999, "multiplier": 1.5}
+        ],
+        "contests": [
+          {"name": "Speed to Lead", "metric": "Menor tempo médio de resposta", "prize": "R$300", "duration": "semanal"},
+          {"name": "Consistência", "metric": "Bater meta 3 meses seguidos", "prize": "R$1.500 bônus", "duration": "trimestral"}
+        ]
+      },
+      {
+        "role": "Closer (Consultor de Vendas)",
+        "headcount": 3,
+        "base_salary": 4500,
+        "ote": 12000,
+        "variable_pct": 63,
+        "target_metric": "Receita Fechada",
+        "target_value": 120000,
+        "target_unit": "BRL/mês",
+        "commission_pct": 6,
+        "accelerators": [
+          {"min_pct": 0, "max_pct": 70, "multiplier": 0},
+          {"min_pct": 71, "max_pct": 85, "multiplier": 0.5},
+          {"min_pct": 86, "max_pct": 99, "multiplier": 0.7},
+          {"min_pct": 100, "max_pct": 119, "multiplier": 1.0},
+          {"min_pct": 120, "max_pct": 999, "multiplier": 1.5}
+        ],
+        "contests": [
+          {"name": "Turma Cheia", "metric": "Preencher turma antes do deadline", "prize": "R$2.000", "duration": "por turma"},
+          {"name": "Upsell Master", "metric": "Maior receita de upgrade (GE → Traction → Club)", "prize": "R$1.500", "duration": "mensal"}
+        ]
+      },
+      {
+        "role": "Customer Success",
+        "headcount": 3,
+        "base_salary": 4000,
+        "ote": 6500,
+        "variable_pct": 38,
+        "target_metric": "Renovação + NPS",
+        "target_value": 90,
+        "target_unit": "% renovação",
+        "commission_pct": 3,
+        "split_metrics": [
+          {"name": "Taxa de Renovação", "weight": 50, "description": "% da base renovada no prazo"},
+          {"name": "NPS", "weight": 30, "description": "NPS da carteira > 75"},
+          {"name": "Expansão", "weight": 20, "description": "Receita de upgrade dentro da carteira"}
+        ],
+        "accelerators": [
+          {"min_pct": 0, "max_pct": 70, "multiplier": 0},
+          {"min_pct": 71, "max_pct": 85, "multiplier": 0.5},
+          {"min_pct": 86, "max_pct": 99, "multiplier": 0.7},
+          {"min_pct": 100, "max_pct": 119, "multiplier": 1.0},
+          {"min_pct": 120, "max_pct": 999, "multiplier": 1.5}
+        ],
+        "contests": [
+          {"name": "Churn Zero", "metric": "Zero churn voluntário no mês", "prize": "R$1.000", "duration": "mensal"},
+          {"name": "Case de Sucesso", "metric": "Produzir case publicável com cliente", "prize": "R$800", "duration": "trimestral"}
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "company_name": "TechScale B2B (Demo)",
+  "industry": "SaaS B2B",
+  "monthly_budget": 500000,
+  "currency": "BRL",
+  "channels": {
+    "data": [
+      {"name": "Meta Ads", "validation": 9, "potential": 8, "category": "escala", "budget": 175000, "roi_confirmed": true, "ltv_cac": 4.2, "cycle_days": 45, "notes": "Principal canal de demand gen, escala previsível"},
+      {"name": "Google Ads", "validation": 8, "potential": 7, "category": "escala", "budget": 125000, "roi_confirmed": true, "ltv_cac": 3.8, "cycle_days": 30, "notes": "Alta intenção, CAC estável mas crescente"},
+      {"name": "Indicações", "validation": 9, "potential": 6, "category": "escala", "budget": 10000, "roi_confirmed": true, "ltv_cac": 12.5, "cycle_days": 15, "notes": "Melhor LTV:CAC, programa de referral ativo mas pouco investido"},
+      {"name": "SEO / Conteúdo", "validation": 5, "potential": 8, "category": "aceleracao", "budget": 40000, "roi_confirmed": false, "ltv_cac": 6.1, "cycle_days": 90, "notes": "6 meses investindo, primeiros leads orgânicos aparecendo"},
+      {"name": "LinkedIn Ads", "validation": 4, "potential": 7, "category": "aceleracao", "budget": 25000, "roi_confirmed": false, "ltv_cac": 2.1, "cycle_days": 60, "notes": "CPL alto (R$800+), testando formatos de conteúdo patrocinado"},
+      {"name": "Eventos Presenciais", "validation": 7, "potential": 5, "category": "escala", "budget": 50000, "roi_confirmed": true, "ltv_cac": 5.3, "cycle_days": 20, "notes": "2 eventos/trimestre, bom para enterprise, custo fixo alto"},
+      {"name": "Podcast", "validation": 3, "potential": 6, "category": "descoberta", "budget": 15000, "roi_confirmed": false, "ltv_cac": null, "cycle_days": null, "notes": "Lançado há 2 meses, 12 episódios, sem atribuição clara"},
+      {"name": "YouTube", "validation": 2, "potential": 7, "category": "aceleracao", "budget": 20000, "roi_confirmed": false, "ltv_cac": null, "cycle_days": null, "notes": "Canal novo, potencial alto baseado em benchmarks do segmento"},
+      {"name": "Field Sales Outbound", "validation": 8, "potential": 6, "category": "escala", "budget": 25000, "roi_confirmed": true, "ltv_cac": 3.2, "cycle_days": 75, "notes": "Time de 3 SDRs, bom para deals enterprise (ticket > R$50K)"},
+      {"name": "Influencers B2B", "validation": 3, "potential": 5, "category": "descoberta", "budget": 10000, "roi_confirmed": false, "ltv_cac": null, "cycle_days": null, "notes": "Testou 2 campanhas com creators do nicho, resultado misto"},
+      {"name": "TikTok Ads", "validation": 1, "potential": 4, "category": "descoberta", "budget": 5000, "roi_confirmed": false, "ltv_cac": null, "cycle_days": null, "notes": "Não testou ainda para B2B, audiência incerta"},
+      {"name": "OOH / Rádio", "validation": 1, "potential": 2, "category": "descoberta", "budget": 0, "roi_confirmed": false, "ltv_cac": null, "cycle_days": null, "notes": "Sem fit para SaaS B2B"}
+    ],
+    "pegadinhas_didaticas": [
+      "Indicações tem o melhor LTV:CAC (12.5x) mas recebe apenas 2% do budget — oportunidade óbvia",
+      "TikTok e OOH estão no quadrante EXPLORAR — é onde testar rápido e cortar se não funcionar",
+      "LinkedIn tem LTV:CAC de apenas 2.1x apesar de 5% do budget — questionar ROI",
+      "SEO tem potencial 8 mas validação 5 — é o clássico canal APOSTAR com paciência"
+    ]
+  },
+  "comp_plan": {
+    "revenue_target": 1200000,
+    "max_commission_pct": 12,
+    "plans": [
+      {
+        "role": "SDR",
+        "headcount": 5,
+        "base_salary": 3000,
+        "ote": 6000,
+        "variable_pct": 50,
+        "target_metric": "Reuniões Qualificadas",
+        "target_value": 20,
+        "target_unit": "reuniões/mês",
+        "commission_per_unit": 150,
+        "accelerators": [
+          {"min_pct": 0, "max_pct": 70, "multiplier": 0},
+          {"min_pct": 71, "max_pct": 85, "multiplier": 0.5},
+          {"min_pct": 86, "max_pct": 99, "multiplier": 0.7},
+          {"min_pct": 100, "max_pct": 119, "multiplier": 1.0},
+          {"min_pct": 120, "max_pct": 999, "multiplier": 1.5}
+        ],
+        "contests": [
+          {"name": "Sprint Semanal", "metric": "Maior volume de reuniões agendadas", "prize": "R$500 bônus", "duration": "1 semana"},
+          {"name": "Rampa SDR", "metric": "Bater meta 3 meses seguidos", "prize": "Promoção para Closer", "duration": "3 meses"}
+        ]
+      },
+      {
+        "role": "Closer (AE)",
+        "headcount": 4,
+        "base_salary": 5000,
+        "ote": 15000,
+        "variable_pct": 67,
+        "target_metric": "Receita Fechada",
+        "target_value": 100000,
+        "target_unit": "BRL/mês",
+        "commission_pct": 10,
+        "accelerators": [
+          {"min_pct": 0, "max_pct": 70, "multiplier": 0},
+          {"min_pct": 71, "max_pct": 85, "multiplier": 0.5},
+          {"min_pct": 86, "max_pct": 99, "multiplier": 0.7},
+          {"min_pct": 100, "max_pct": 119, "multiplier": 1.0},
+          {"min_pct": 120, "max_pct": 999, "multiplier": 1.5}
+        ],
+        "contests": [
+          {"name": "Deal do Mês", "metric": "Maior deal fechado", "prize": "R$2.000 bônus", "duration": "mensal"},
+          {"name": "Meta Trimestral", "metric": "Bater meta 3 meses consecutivos", "prize": "PLR trimestral de 1x salário", "duration": "trimestral"}
+        ]
+      },
+      {
+        "role": "Account Manager (Farmer)",
+        "headcount": 3,
+        "base_salary": 5500,
+        "ote": 11000,
+        "variable_pct": 50,
+        "target_metric": "Receita de Expansão + Renovação",
+        "target_value": 80000,
+        "target_unit": "BRL/mês",
+        "commission_pct": 7,
+        "split_metrics": [
+          {"name": "Renovação", "weight": 40, "description": "% da carteira renovada no prazo"},
+          {"name": "Expansão", "weight": 40, "description": "Receita incremental (upsell/cross-sell)"},
+          {"name": "NPS", "weight": 20, "description": "NPS da carteira > 70 para desbloquear comissão"}
+        ],
+        "accelerators": [
+          {"min_pct": 0, "max_pct": 70, "multiplier": 0},
+          {"min_pct": 71, "max_pct": 85, "multiplier": 0.5},
+          {"min_pct": 86, "max_pct": 99, "multiplier": 0.7},
+          {"min_pct": 100, "max_pct": 119, "multiplier": 1.0},
+          {"min_pct": 120, "max_pct": 999, "multiplier": 1.5}
+        ],
+        "contests": [
+          {"name": "Churn Zero", "metric": "Zero churn no mês", "prize": "R$1.500 bônus", "duration": "mensal"},
+          {"name": "Expansão Recorde", "metric": "Maior upsell do trimestre", "prize": "Viagem incentivo", "duration": "trimestral"}
+        ]
+      }
+    ]
+  }
+}

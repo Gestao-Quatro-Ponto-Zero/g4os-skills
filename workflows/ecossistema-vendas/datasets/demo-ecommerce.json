@@ -1,0 +1,75 @@
+{
+  "company_name": "ModaPlus E-commerce (Demo)",
+  "industry": "E-commerce Moda",
+  "monthly_budget": 200000,
+  "currency": "BRL",
+  "channels": {
+    "data": [
+      {"name": "Meta Ads (Instagram + FB)", "validation": 9, "potential": 9, "category": "escala", "budget": 80000, "roi_confirmed": true, "ltv_cac": 3.5, "cycle_days": 3, "notes": "40% do budget, principal canal de receita direta"},
+      {"name": "Google Shopping", "validation": 8, "potential": 8, "category": "escala", "budget": 40000, "roi_confirmed": true, "ltv_cac": 4.1, "cycle_days": 1, "notes": "Alta intenção de compra, ROAS 4.5x"},
+      {"name": "Email Marketing", "validation": 8, "potential": 6, "category": "escala", "budget": 8000, "roi_confirmed": true, "ltv_cac": 15.0, "cycle_days": 2, "notes": "Base de 120K emails, automações de carrinho e pós-compra"},
+      {"name": "SEO", "validation": 6, "potential": 8, "category": "aceleracao", "budget": 15000, "roi_confirmed": true, "ltv_cac": 7.2, "cycle_days": 5, "notes": "Blog com 50 artigos, tráfego orgânico crescendo 15%/mês"},
+      {"name": "Influencers", "validation": 4, "potential": 8, "category": "aceleracao", "budget": 25000, "roi_confirmed": false, "ltv_cac": 2.8, "cycle_days": 7, "notes": "5 influencers ativos, difícil medir atribuição direta"},
+      {"name": "TikTok Ads", "validation": 3, "potential": 7, "category": "aceleracao", "budget": 12000, "roi_confirmed": false, "ltv_cac": null, "cycle_days": 5, "notes": "3 meses testando, CPL baixo mas conversão incerta"},
+      {"name": "Marketplace (Mercado Livre)", "validation": 7, "potential": 5, "category": "escala", "budget": 10000, "roi_confirmed": true, "ltv_cac": 2.2, "cycle_days": 1, "notes": "Receita estável, margem apertada pela comissão do ML"},
+      {"name": "WhatsApp Broadcast", "validation": 5, "potential": 5, "category": "descoberta", "budget": 3000, "roi_confirmed": false, "ltv_cac": null, "cycle_days": 1, "notes": "Lista de 8K contatos, disparo quinzenal"},
+      {"name": "Pinterest Ads", "validation": 1, "potential": 5, "category": "descoberta", "budget": 4000, "roi_confirmed": false, "ltv_cac": null, "cycle_days": null, "notes": "Primeiro teste, moda feminina tem fit"},
+      {"name": "Indicações (Member Get Member)", "validation": 6, "potential": 4, "category": "escala", "budget": 3000, "roi_confirmed": true, "ltv_cac": 8.0, "cycle_days": 3, "notes": "Programa com cupom de 15% para indicador e indicado"}
+    ],
+    "pegadinhas_didaticas": [
+      "Meta Ads consome 40% do budget mas LTV:CAC de 3.5x — concentração alta, risco de dependência",
+      "Influencers recebem 12.5% do budget mas LTV:CAC de apenas 2.8x — questionar modelo de atribuição",
+      "Email Marketing tem LTV:CAC de 15x com apenas 4% do budget — sub-investido",
+      "TikTok no APOSTAR — precisa de critério claro de go/no-go em 6 meses"
+    ]
+  },
+  "comp_plan": {
+    "revenue_target": 800000,
+    "max_commission_pct": 8,
+    "plans": [
+      {
+        "role": "Atendente de Vendas (WhatsApp)",
+        "headcount": 4,
+        "base_salary": 2200,
+        "ote": 4500,
+        "variable_pct": 51,
+        "target_metric": "Receita de Vendas Assistidas",
+        "target_value": 30000,
+        "target_unit": "BRL/mês",
+        "commission_pct": 7,
+        "accelerators": [
+          {"min_pct": 0, "max_pct": 70, "multiplier": 0},
+          {"min_pct": 71, "max_pct": 85, "multiplier": 0.5},
+          {"min_pct": 86, "max_pct": 99, "multiplier": 0.7},
+          {"min_pct": 100, "max_pct": 119, "multiplier": 1.0},
+          {"min_pct": 120, "max_pct": 999, "multiplier": 1.5}
+        ],
+        "contests": [
+          {"name": "Ticket Médio", "metric": "Maior ticket médio da semana", "prize": "R$200", "duration": "semanal"},
+          {"name": "Recompra", "metric": "Mais clientes recomprando no mês", "prize": "R$500", "duration": "mensal"}
+        ]
+      },
+      {
+        "role": "Gerente de E-commerce",
+        "headcount": 1,
+        "base_salary": 8000,
+        "ote": 14000,
+        "variable_pct": 43,
+        "target_metric": "Receita Total do E-commerce",
+        "target_value": 800000,
+        "target_unit": "BRL/mês",
+        "commission_pct": 0.75,
+        "accelerators": [
+          {"min_pct": 0, "max_pct": 70, "multiplier": 0},
+          {"min_pct": 71, "max_pct": 85, "multiplier": 0.5},
+          {"min_pct": 86, "max_pct": 99, "multiplier": 0.7},
+          {"min_pct": 100, "max_pct": 119, "multiplier": 1.0},
+          {"min_pct": 120, "max_pct": 999, "multiplier": 1.5}
+        ],
+        "contests": [
+          {"name": "ROAS Recorde", "metric": "Melhor ROAS do trimestre", "prize": "R$3.000 bônus", "duration": "trimestral"}
+        ]
+      }
+    ]
+  }
+}
