@@ -14,7 +14,9 @@ Workflow interativo com 3 ferramentas para destravar crescimento. Baseado na aul
 
 Cole no chat do G4 OS:
 
-> Instale o workflow "Mentalidade de Growth" do repositório g4os-skills: https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills/tree/main/workflows/mentalidade-growth
+```
+Instale o workflow "Mentalidade de Growth" do repositório g4os-skills: https://github.com/Gestao-Quatro-Ponto-Zero/g4os-skills/tree/main/workflows/mentalidade-growth
+```
 
 O G4 OS vai:
 1. Baixar todos os arquivos (WORKFLOW.md, scripts, knowledge, datasets)
