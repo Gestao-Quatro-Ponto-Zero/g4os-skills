@@ -26,6 +26,7 @@ Skills sao ferramentas de proposito unico. Workflows sao processos multi-fase co
 | **[Ecossistema de Vendas](workflows/ecossistema-vendas/)** | 3 ferramentas praticas para construir seu ecossistema de vendas — priorizacao de canais (matriz 2x2), alocacao de budget (70/20/10), e comp plan com aceleradores. Framework Alfredo Soares. | `workflows/ecossistema-vendas` |
 | **[Mentalidade de Growth](workflows/mentalidade-growth/)** | 3 ferramentas para destravar crescimento — escada de valor (LTV), diagnostico de maturidade (radar 4 areas), e analise RFV (11 segmentos). Framework Bruno Nardon. | `workflows/mentalidade-growth` |
 | **[Metodo Founder](workflows/metodo-founder/)** | Construa sua marca pessoal estrategica como founder — diagnostico, posicionamento, narrativa e plano de 90 dias usando os frameworks FOUNDER, LED e GROWTH. Metodo Allan Barros. | `workflows/metodo-founder` |
+| **[Stock Pick Analysis](workflows/stock-pick/)** | Analise fundamentalista completa de acoes — valuation (DCF, Gordon, multiplos), peer comparison, sensitivity analysis, e recomendacao BUY/HOLD/SELL para 12 meses e 5 anos | `workflows/stock-pick` |
 
 ---
 
